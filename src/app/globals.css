@@ -1,0 +1,112 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-black: var(--black-color);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: #000000;
+  --foreground: #eaeaea;
+  --card: #0a0a0a;
+  --card-foreground: #eaeaea;
+  --popover: #0a0a0a;
+  --popover-foreground: #eaeaea;
+  --primary: #eaeaea;
+  --primary-foreground: #000000;
+  --secondary: #134a87;
+  --secondary-foreground: #eaeaea;
+
+  --black-color: #000000;
+}
+
+@layer base {
+  * {
+    border-color: #232526;
+    outline-color: #134a87;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-space-mono);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer utilities {
+  .font-header {
+    font-family: var(--font-poppins);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .button-3d {
+    position: relative;
+    width: 150px;
+    height: 50px;
+    transition: 4s;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(0deg);
+  }
+
+  .button-3d:hover {
+    transform: perspective(1000px) rotateX(360deg);
+  }
+
+  .button-3d span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    background: rgba(255, 255, 255, 0.9);
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 22px;
+    letter-spacing: 2px;
+    transition: 0.5s;
+    border: 2px solid #000;
+    box-sizing: border-box;
+    box-shadow: inset 0 20px 50px rgba(0, 0, 0, 0.2);
+  }
+
+  .button-3d:hover span {
+    color: #fff;
+    background: rgba(19, 74, 135, 0.8);
+  }
+
+  .button-3d span:nth-child(1) {
+    transform: rotateX(0deg) translateZ(25px);
+  }
+
+  .button-3d span:nth-child(2) {
+    transform: rotateX(90deg) translateZ(25px);
+  }
+
+  .button-3d span:nth-child(3) {
+    transform: rotateX(180deg) translateZ(25px);
+  }
+
+  .button-3d span:nth-child(4) {
+    transform: rotateX(270deg) translateZ(25px);
+  }
+}
+
