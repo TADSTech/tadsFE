@@ -98,17 +98,14 @@ export const FloatingNav = ({
             key={`link=${idx}`}
             href={navItem.link}
             className={cn(
-              "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 transition-colors"
+              "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 transition-colors regular-hover"
             )}
           >
             <span className="block sm:hidden">{navItem.icon}</span>
             <span className="hidden sm:block text-sm md:text-base">{navItem.name}</span>
           </a>
         ))}
-        <button className="border text-sm md:text-base font-medium relative border-neutral-200 dark:border-white/20 text-black dark:text-white px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-secondary hover:border-secondary hover:text-secondary-foreground transition-colors button-3d">
-          <span>Contact</span>
-          <span>Contact</span>
-          <span>Contact</span>
+        <button className="border text-sm md:text-base font-medium relative border-neutral-200 dark:border-white/20 text-black dark:text-white px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-secondary hover:border-secondary hover:text-secondary-foreground transition-colors glow-on-hover">
           <span>Contact</span>
           <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-linear-to-r from-transparent via-blue-500 to-transparent  h-px" />
         </button>

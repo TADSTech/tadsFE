@@ -49,64 +49,110 @@
 
 @layer utilities {
   .font-header {
-    font-family: var(--font-poppins);
+    font-family: var(--font-space-mono);
     font-weight: 800;
     letter-spacing: -0.02em;
   }
 
-  .button-3d {
+  .regular-hover {
     position: relative;
-    width: 150px;
-    height: 50px;
-    transition: 4s;
-    transform-style: preserve-3d;
-    transform: perspective(1000px) rotateX(0deg);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0);
   }
 
-  .button-3d:hover {
-    transform: perspective(1000px) rotateX(360deg);
-  }
-
-  .button-3d span {
+  .regular-hover::after {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 0;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--secondary);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-50%);
+  }
+
+  .regular-hover:hover {
+    transform: translateY(-4px);
+    color: var(--secondary);
+  }
+
+  .regular-hover:hover::after {
+    width: 100%;
+  }
+
+  .regular-hover:active {
+    transform: translateY(-2px);
+  }
+
+  .glow-on-hover {
+    width: 100px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: var(--foreground);
+    background: var(--background);
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family: var(--font-space-mono);
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, 
+      var(--secondary), 
+      #1a5fa8, 
+      #2374c9, 
+      #1a5fa8, 
+      var(--secondary)
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+  }
+
+  .glow-on-hover:active {
+    color: var(--background);
+  }
+
+  .glow-on-hover:active:after {
+    background: transparent;
+  }
+
+  .glow-on-hover:hover:before {
+    opacity: 1;
+  }
+
+  .glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    background: rgba(255, 255, 255, 0.9);
-    font-family: sans-serif;
-    text-transform: uppercase;
-    font-size: 22px;
-    letter-spacing: 2px;
-    transition: 0.5s;
-    border: 2px solid #000;
-    box-sizing: border-box;
-    box-shadow: inset 0 20px 50px rgba(0, 0, 0, 0.2);
+    background: var(--background);
+    left: 0;
+    top: 0;
+    border-radius: 10px;
   }
 
-  .button-3d:hover span {
-    color: #fff;
-    background: rgba(19, 74, 135, 0.8);
-  }
-
-  .button-3d span:nth-child(1) {
-    transform: rotateX(0deg) translateZ(25px);
-  }
-
-  .button-3d span:nth-child(2) {
-    transform: rotateX(90deg) translateZ(25px);
-  }
-
-  .button-3d span:nth-child(3) {
-    transform: rotateX(180deg) translateZ(25px);
-  }
-
-  .button-3d span:nth-child(4) {
-    transform: rotateX(270deg) translateZ(25px);
+  @keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
   }
 }
 
