@@ -1,5 +1,6 @@
 "use client"
 import {Header} from '../../components/sections/Header';
+import {Hero} from '../../components/sections/Hero';
 
 
 export default function MainPage() {
@@ -7,6 +8,7 @@ export default function MainPage() {
     return (
         <div>
             <Header />
+            <Hero />
             <section id="home" className="min-h-screen flex flex-col items-center justify-center bg-background">
                 <h1 className="font-header text-5xl mb-8">Main Content</h1>
                 <button className="mb-8 px-6 py-3 bg-secondary text-secondary-foreground rounded-full" onClick={() => alert("Button clicked!")}>Click Me</button>
