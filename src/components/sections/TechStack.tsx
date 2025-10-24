@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { motion } from "motion/react";
 import { TextHoverEffect } from "../ui/text-hover-effect";
@@ -16,17 +17,21 @@ import {
     BarChart3,
     Database,
     PieChart,
-    Cpu,
     Boxes,
-    Brush,
     Binary
 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 
 export const TechStack: React.FC = () => {
+    // ============================================================
+    // TECHNOLOGY DATA STRUCTURE
+    // Organized by category for better UX and SEO
+    // Each technology includes: name, icon, and brand color
+    // ============================================================
+    
     const techCategories = [
         {
             category: "Frontend",
+            description: "Modern web development frameworks and libraries",
             technologies: [
                 { name: "React", icon: Code2, color: "#61DAFB" },
                 { name: "Next.js", icon: Layers, color: "#000000" },
@@ -37,6 +42,7 @@ export const TechStack: React.FC = () => {
         },
         {
             category: "3D & Animation",
+            description: "Interactive 3D graphics and animation libraries",
             technologies: [
                 { name: "Three.js", icon: Box, color: "#000000" },
                 { name: "React Three Fiber", icon: Globe, color: "#134a87" },
@@ -46,6 +52,7 @@ export const TechStack: React.FC = () => {
         },
         {
             category: "Backend & Tools",
+            description: "Server-side technologies and development tools",
             technologies: [
                 { name: "Python", icon: Code2, color: "#3776AB" },
                 { name: "Node.js", icon: Package, color: "#339933" },
@@ -55,6 +62,7 @@ export const TechStack: React.FC = () => {
         },
         {
             category: "Data & Analytics",
+            description: "Data processing and visualization libraries",
             technologies: [
                 { name: "Pandas", icon: BarChart3, color: "#150458" },
                 { name: "NumPy", icon: Binary, color: "#013243" },
@@ -65,29 +73,52 @@ export const TechStack: React.FC = () => {
     ];
 
     return (
-        <section id="tech-stack" className="min-h-screen bg-background py-20 px-6">
+        <section 
+            id="tech-stack" 
+            className="min-h-screen bg-background py-12 sm:py-20 px-4 sm:px-6"
+            aria-labelledby="tech-stack-title"
+        >
             <div className="max-w-7xl mx-auto">
-                {/* Title */}
-                <div className="h-48 flex items-center justify-center mb-12">
+                {/* ============================================================ */}
+                {/* SECTION TITLE - Animated heading */}
+                {/* SEO: Hidden H2 for crawlers, visual effect for users */}
+                {/* ============================================================ */}
+                
+                {/* Hidden heading for SEO */}
+                <h2 id="tech-stack-title" className="sr-only">
+                    Technology Stack and Expertise
+                </h2>
+                
+                {/* Visual title with hover effect */}
+                <div className="h-32 sm:h-48 flex items-center justify-center mb-8 sm:mb-12">
                     <TextHoverEffect text="TECH STACK" duration={2} />
                 </div>
 
-                {/* Intro */}
+                {/* ============================================================ */}
+                {/* INTRODUCTION - Value proposition */}
+                {/* SEO: Contains key context about expertise and approach */}
+                {/* ============================================================ */}
+                
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="max-w-3xl mx-auto text-center mb-16"
+                    className="max-w-3xl mx-auto text-center mb-12 sm:mb-16"
                 >
-                    <p className="text-base md:text-lg text-foreground/80 leading-relaxed font-mono">
+                    <p className="text-sm sm:text-base md:text-lg text-foreground/80 leading-relaxed font-mono px-4">
                         A curated selection of technologies I use to build modern, 
                         performant web applications with exceptional user experiences.
                     </p>
                 </motion.div>
 
-                {/* Tech Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                {/* ============================================================ */}
+                {/* TECHNOLOGY GRID - Main tech showcase */}
+                {/* SEO: Comprehensive list of skills for search visibility */}
+                {/* UX: Interactive cards with hover effects */}
+                {/* ============================================================ */}
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto">
                     {techCategories.map((category, categoryIndex) => (
                         <motion.div
                             key={category.category}
@@ -95,16 +126,25 @@ export const TechStack: React.FC = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-                            className="border border-foreground/10 rounded-2xl p-8 bg-background/50 backdrop-blur-sm hover:border-secondary/30 transition-all duration-300"
+                            className="border border-foreground/10 rounded-2xl p-6 sm:p-8 bg-background/50 backdrop-blur-sm hover:border-secondary/30 transition-all duration-300"
                         >
-                            {/* Category Title */}
-                            <h3 className="font-header text-xl md:text-2xl mb-6 text-foreground flex items-center gap-3">
-                                <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+                            {/* ============================================================ */}
+                            {/* CATEGORY TITLE - Grouped technology section */}
+                            {/* SEO: H3 subheading for structured content */}
+                            {/* ============================================================ */}
+                            
+                            <h3 className="font-header text-lg sm:text-xl md:text-2xl mb-6 text-foreground flex items-center gap-3">
+                                <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" aria-hidden="true" />
                                 {category.category}
                             </h3>
 
-                            {/* Tech Items */}
-                            <div className="grid grid-cols-2 gap-4">
+                            {/* ============================================================ */}
+                            {/* TECHNOLOGY ITEMS - Individual tech cards */}
+                            {/* SEO: Each technology name is crawlable text */}
+                            {/* UX: Interactive hover animations */}
+                            {/* ============================================================ */}
+                            
+                            <div className="grid grid-cols-2 gap-3 sm:gap-4">
                                 {category.technologies.map((tech, techIndex) => (
                                     <motion.div
                                         key={tech.name}
@@ -121,11 +161,14 @@ export const TechStack: React.FC = () => {
                                         }}
                                         className="group relative"
                                     >
-                                        <div className="relative p-4 rounded-xl border border-foreground/10 bg-card/30 hover:border-secondary/50 transition-all duration-300 cursor-pointer overflow-hidden">
-                                            {/* Glow effect on hover */}
-                                            <div className="absolute inset-0 bg-linear-to-br from-secondary/0 via-secondary/5 to-secondary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        <div className="relative p-3 sm:p-4 rounded-xl border border-foreground/10 bg-card/30 hover:border-secondary/50 transition-all duration-300 cursor-pointer overflow-hidden">
+                                            {/* Hover glow effect */}
+                                            <div 
+                                                className="absolute inset-0 bg-linear-to-br from-secondary/0 via-secondary/5 to-secondary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+                                                aria-hidden="true"
+                                            />
                                             
-                                            {/* Content */}
+                                            {/* Technology icon and name */}
                                             <div className="relative z-10 flex flex-col items-center gap-2">
                                                 <motion.div
                                                     whileHover={{ 
@@ -134,17 +177,21 @@ export const TechStack: React.FC = () => {
                                                     }}
                                                 >
                                                     <tech.icon 
-                                                        className="w-8 h-8 text-secondary group-hover:text-secondary/80 transition-colors duration-300" 
+                                                        className="w-6 h-6 sm:w-8 sm:h-8 text-secondary group-hover:text-secondary/80 transition-colors duration-300" 
                                                         strokeWidth={1.5}
+                                                        aria-hidden="true"
                                                     />
                                                 </motion.div>
-                                                <span className="text-sm font-mono text-foreground/70 group-hover:text-secondary transition-colors duration-300">
+                                                <span className="text-xs sm:text-sm font-mono text-foreground/70 group-hover:text-secondary transition-colors duration-300 text-center">
                                                     {tech.name}
                                                 </span>
                                             </div>
 
                                             {/* Bottom accent line */}
-                                            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300" />
+                                            <div 
+                                                className="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300" 
+                                                aria-hidden="true"
+                                            />
                                         </div>
                                     </motion.div>
                                 ))}
@@ -153,19 +200,28 @@ export const TechStack: React.FC = () => {
                     ))}
                 </div>
 
-                {/* Featured Tech - Centered Cards */}
+                {/* ============================================================ */}
+                {/* CURRENTLY EXPLORING SECTION */}
+                {/* SEO: Shows continuous learning and growth mindset */}
+                {/* UX: Pill-style badges with hover effects */}
+                {/* ============================================================ */}
+                
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.4 }}
-                    className="mt-16 max-w-4xl mx-auto"
+                    className="mt-12 sm:mt-16 max-w-4xl mx-auto"
                 >
-                    <h3 className="font-header text-xl text-center mb-8 text-foreground/80">
+                    <h3 className="font-header text-base sm:text-lg md:text-xl text-center mb-6 sm:mb-8 text-foreground/80">
                         Currently Exploring
                     </h3>
                     
-                    <div className="flex flex-wrap justify-center gap-4">
+                    <div 
+                        className="flex flex-wrap justify-center gap-3 sm:gap-4 px-4"
+                        role="list"
+                        aria-label="Technologies currently being explored"
+                    >
                         {["WebGL", "Shaders", "3D modelling", "WebAssembly"].map((tech, index) => (
                             <motion.div
                                 key={tech}
@@ -175,9 +231,10 @@ export const TechStack: React.FC = () => {
                                 transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
                                 whileHover={{ scale: 1.1 }}
                                 className="group relative"
+                                role="listitem"
                             >
-                                <div className="relative px-6 py-2 rounded-full border-2 border-secondary/30 bg-background hover:border-secondary hover:shadow-[0_0_20px_rgba(19,74,135,0.3)] transition-all duration-300">
-                                    <span className="font-mono text-sm text-foreground group-hover:text-secondary transition-colors duration-300">
+                                <div className="relative px-4 sm:px-6 py-2 rounded-full border-2 border-secondary/30 bg-background hover:border-secondary hover:shadow-[0_0_20px_rgba(19,74,135,0.3)] transition-all duration-300">
+                                    <span className="font-mono text-xs sm:text-sm text-foreground group-hover:text-secondary transition-colors duration-300">
                                         {tech}
                                     </span>
                                 </div>
@@ -186,16 +243,20 @@ export const TechStack: React.FC = () => {
                     </div>
                 </motion.div>
 
-                {/* Bottom CTA */}
+                {/* ============================================================ */}
+                {/* PHILOSOPHY QUOTE - Brand messaging */}
+                {/* SEO: Reinforces values and approach */}
+                {/* ============================================================ */}
+                
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.6 }}
-                    className="text-center mt-16"
+                    className="text-center mt-12 sm:mt-16 px-4"
                 >
                     <p className="text-xs md:text-sm text-foreground/50 font-mono italic">
-                        "The best tool is the one that solves the problem elegantly."
+                        &quot;The best tool is the one that solves the problem elegantly.&quot;
                     </p>
                 </motion.div>
             </div>

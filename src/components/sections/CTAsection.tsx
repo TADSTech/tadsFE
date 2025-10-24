@@ -6,23 +6,6 @@ import { AuroraBackground } from "../ui/aurora-background";
 import { ArrowRight, Sparkles, Zap, Globe as GlobeIcon, Code2 } from "lucide-react";
 import Link from "next/link";
 
-/* ================================================================================================
-   CTA SECTION - Call-to-action with aurora background and animated elements
-   
-   SEO Optimized:
-   - Clear heading hierarchy (h2)
-   - Descriptive text content for crawlers
-   - Semantic HTML structure
-   - Trust indicators (stats, experience)
-   - Strong CTA with clear value proposition
-   
-   Performance:
-   - Conditional rendering based on device
-   - Reduced animations on mobile
-   - Static aurora background on mobile
-   - Progressive enhancement approach
-================================================================================================ */
-
 export const CTASection: React.FC = () => {
     // ============================================================
     // STATE & DEVICE DETECTION

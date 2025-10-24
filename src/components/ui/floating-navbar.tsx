@@ -27,6 +27,20 @@ export const FloatingNav = ({
   const [visible, setVisible] = useState(true);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // ============================================================
+  // SMOOTH SCROLL HANDLER
+  // UX: Smooth navigation for better user experience
+  // ============================================================
+  
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -81,7 +95,11 @@ export const FloatingNav = ({
           className
         )}
       >
-        <a href="#" className="flex items-center space-x-2 mr-8 md:mr-50 pr-10 md:pr-16 border-r border-neutral-200 dark:border-white/20">
+        <a 
+          href="#" 
+          onClick={(e) => handleSmoothScroll(e, '#hero')}
+          className="flex items-center space-x-2 mr-8 md:mr-50 pr-10 md:pr-16 border-r border-neutral-200 dark:border-white/20"
+        >
           <div className="relative w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden">
             <Image
               src="/logo/tadsfelogos-black.png"
@@ -98,6 +116,7 @@ export const FloatingNav = ({
           <a
             key={`link=${idx}`}
             href={navItem.link}
+            onClick={(e) => handleSmoothScroll(e, navItem.link)}
             className={cn(
               "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 transition-colors regular-hover"
             )}
