@@ -39,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# https://open.spotify.com/playlist/3ghZudLDDkSV267n94hTYt?si=df1d810234514369
