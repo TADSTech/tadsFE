@@ -8,7 +8,6 @@ export const TextHoverEffect = ({
 }: {
   text: string;
   duration?: number;
-  automatic?: boolean;
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
@@ -44,6 +43,7 @@ export const TextHoverEffect = ({
       onMouseLeave={() => setHovered(false)}
       onMouseMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
       className="select-none"
+      preserveAspectRatio="xMidYMid meet"
     >
       <defs>
         <linearGradient
@@ -91,24 +91,34 @@ export const TextHoverEffect = ({
           />
         </mask>
       </defs>
+
+      {/* Background text layer - visible on hover */}
       <text
         x="50%"
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.4"
-        className="fill-transparent stroke-foreground/40 font-[helvetica] text-7xl font-bold"
-        style={{ opacity: hovered ? 0.8 : 0 }}
+        className="fill-transparent stroke-foreground/40 font-[helvetica] font-bold"
+        style={{ opacity: hovered ? 0.7 : 0 }}
+        fontSize="40"
+        textLength="280"
+        lengthAdjust="spacingAndGlyphs"
       >
         {text}
       </text>
+
+      {/* Animated stroke drawing text */}
       <motion.text
         x="50%"
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.4"
-        className="fill-transparent stroke-foreground/50 font-[helvetica] text-7xl font-bold"
+        className="fill-transparent stroke-foreground/50 font-[helvetica] font-bold"
+        fontSize="40"
+        textLength="280"
+        lengthAdjust="spacingAndGlyphs"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,
@@ -121,6 +131,8 @@ export const TextHoverEffect = ({
       >
         {text}
       </motion.text>
+
+      {/* Main gradient text with mask */}
       <text
         x="50%"
         y="50%"
@@ -129,7 +141,10 @@ export const TextHoverEffect = ({
         stroke={`url(#${gradientId})`}
         strokeWidth="0.5"
         mask={`url(#${maskId})`}
-        className="fill-transparent font-[helvetica] text-7xl font-bold"
+        className="fill-transparent font-[helvetica] font-bold"
+        fontSize="40"
+        textLength="280"
+        lengthAdjust="spacingAndGlyphs"
       >
         {text}
       </text>

@@ -41,22 +41,22 @@ export const WhatWeDo: React.FC = () => {
     // ============================================================
 
     return(
-        <section id="what-we-do" className="min-h-screen bg-background py-20 px-6">
+        <section id="what-we-do" className="min-h-screen bg-background py-12 sm:py-20 px-4 sm:px-6">
             <div className="max-w-6xl mx-auto">
                 {/* ============================================================ */}
                 {/* SECTION TITLE */}
                 {/* ============================================================ */}
                 
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, scale: 1.2 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="h-32 sm:h-40 md:h-48 flex items-center justify-center mb-8 sm:mb-12"
-                >
-                    <div className="scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 origin-center">
+                    className="h-24 sm:h-32 md:h-40 lg:h-48 flex items-center justify-center mb-6 sm:mb-8 md:mb-12"
+                    >
+                    <div className="w-4/5 sm:w-3/4 md:w-2/3 aspect-3/1">
                         <TextHoverEffect text="WHAT WE DO" duration={2} />
                     </div>
-                </motion.div>
+                </motion.div>   
 
                 {/* ============================================================ */}
                 {/* INTRODUCTION TEXT */}
