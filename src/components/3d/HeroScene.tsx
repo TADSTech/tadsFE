@@ -1,28 +1,54 @@
 'use client';
 
-import React, { useRef, useMemo, useState } from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Points, PointMaterial, Stars, PerspectiveCamera, Float, Sparkles } from '@react-three/drei';
 import * as random from 'maath/random';
 import { Vector3, Color, AdditiveBlending, Points as ThreePoints } from 'three';
 import { CircuitFab } from '../models/CircuitFab'; 
 
-const NUM_PARTICLES = 6000;
+// Device detection and performance settings
+const getDeviceConfig = () => {
+  if (typeof window === 'undefined') {
+    return { isMobile: false, isTablet: false, isDesktop: true };
+  }
+  
+  const width = window.innerWidth;
+  const isMobile = width < 768;
+  const isTablet = width >= 768 && width < 1024;
+  const isDesktop = width >= 1024;
+  
+  return { isMobile, isTablet, isDesktop };
+};
+
+// Performance-based particle counts
+const getParticleCount = () => {
+  const { isMobile, isTablet } = getDeviceConfig();
+  if (isMobile) return 1500; // Reduced significantly for mobile
+  if (isTablet) return 3500; // Moderate for tablets
+  return 6000; // Full experience for desktop
+};
+
+const COLOR_A = '#0f4c81';
+const COLOR_B = '#57a0d3';
 const PARTICLE_SPEED = 0.15;
 const CURL_STRENGTH = 0.08;
 const MOUSE_INFLUENCE = 0.25;
 const ATTRACTION_POINT = new Vector3(1.5, -2, 0);
 const SPAWN_RADIUS = 4.5;
 const RESET_RADIUS = 1.5;
-const COLOR_A = '#0f4c81';
-const COLOR_B = '#57a0d3';
 
 interface MousePosition {
   x: number;
   y: number;
 }
 
-const ParticleSwarm: React.FC<{ mousePosition: MousePosition }> = ({ mousePosition }) => {
+interface ParticleSwarmProps {
+  mousePosition: MousePosition;
+  numParticles: number;
+}
+
+const ParticleSwarm: React.FC<ParticleSwarmProps> = ({ mousePosition, numParticles }) => {
   const pointsRef = useRef<ThreePoints>(null);
   const { viewport } = useThree();
 
@@ -31,12 +57,12 @@ const ParticleSwarm: React.FC<{ mousePosition: MousePosition }> = ({ mousePositi
   const _mouse = useMemo(() => new Vector3(), []);
 
   const { positions, colors } = useMemo(() => {
-    const tempPositions = new Float32Array(NUM_PARTICLES * 3);
-    const tempColors = new Float32Array(NUM_PARTICLES * 3);
+    const tempPositions = new Float32Array(numParticles * 3);
+    const tempColors = new Float32Array(numParticles * 3);
     const colorA = new Color(COLOR_A);
     const colorB = new Color(COLOR_B);
 
-    for (let i = 0; i < NUM_PARTICLES; i++) {
+    for (let i = 0; i < numParticles; i++) {
       const [x, y, z] = random.inSphere(new Float32Array(3), { radius: SPAWN_RADIUS });
       tempPositions.set([x, y, z], i * 3);
       
@@ -44,7 +70,7 @@ const ParticleSwarm: React.FC<{ mousePosition: MousePosition }> = ({ mousePositi
       tempColors.set([color.r, color.g, color.b], i * 3);
     }
     return { positions: tempPositions, colors: tempColors };
-  }, []);
+  }, [numParticles]);
 
   useFrame((state, delta) => {
     if (!pointsRef.current) return;
@@ -59,7 +85,7 @@ const ParticleSwarm: React.FC<{ mousePosition: MousePosition }> = ({ mousePositi
 
     _attractor.copy(ATTRACTION_POINT).add(_mouse.multiplyScalar(MOUSE_INFLUENCE));
 
-    for (let i = 0; i < NUM_PARTICLES; i++) {
+    for (let i = 0; i < numParticles; i++) {
       const i3 = i * 3;
       _particle.set(currentPositions[i3], currentPositions[i3 + 1], currentPositions[i3 + 2]);
       
@@ -125,13 +151,39 @@ const CameraRig: React.FC = () => {
 
 export const HeroScene: React.FC = () => {
   const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
+  const [deviceConfig, setDeviceConfig] = useState({ isMobile: false, isTablet: false, isDesktop: true });
+  const [numParticles, setNumParticles] = useState(6000);
+
+  useEffect(() => {
+    // Set device config and particle count on mount
+    const config = getDeviceConfig();
+    setDeviceConfig(config);
+    setNumParticles(getParticleCount());
+
+    // Update on window resize
+    const handleResize = () => {
+      const newConfig = getDeviceConfig();
+      setDeviceConfig(newConfig);
+      setNumParticles(getParticleCount());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    // Disable mouse tracking on mobile for better performance
+    if (deviceConfig.isMobile) return;
+    
     const rect = event.currentTarget.getBoundingClientRect();
     const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
     const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
     setMousePosition({ x, y });
   };
+
+  // Get star count based on device
+  const starCount = deviceConfig.isMobile ? 1500 : deviceConfig.isTablet ? 3000 : 5000;
+  const sparkleCount = deviceConfig.isMobile ? 20 : deviceConfig.isTablet ? 50 : 80;
 
   return (
     <div 
@@ -142,57 +194,97 @@ export const HeroScene: React.FC = () => {
         frameloop="always"
         camera={{ position: [0, 0, 5], fov: 75 }} 
         className="h-full w-full"
-        gl={{ alpha: true, antialias: true }}
-        shadows
+        gl={{ 
+          alpha: true, 
+          antialias: !deviceConfig.isMobile, // Disable antialiasing on mobile for performance
+          powerPreference: deviceConfig.isMobile ? 'low-power' : 'high-performance'
+        }}
+        shadows={!deviceConfig.isMobile} // Disable shadows on mobile
+        dpr={deviceConfig.isMobile ? [1, 1.5] : [1, 2]} // Lower pixel ratio on mobile
       >
         <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={75} />
 
         <ambientLight intensity={0.6} />
-        <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
-        <pointLight position={[3, -2, 3]} intensity={2} color={COLOR_B} />
-        <pointLight position={[-2, 1, -1]} intensity={1.2} color={COLOR_A} />
-        <spotLight position={[5, 5, 5]} intensity={0.5} angle={0.3} penumbra={1} color="#ffffff" castShadow />
+        
+        {/* Conditional lighting based on device */}
+        {!deviceConfig.isMobile && (
+          <>
+            <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
+            <pointLight position={[3, -2, 3]} intensity={2} color={COLOR_B} />
+            <pointLight position={[-2, 1, -1]} intensity={1.2} color={COLOR_A} />
+            <spotLight position={[5, 5, 5]} intensity={0.5} angle={0.3} penumbra={1} color="#ffffff" castShadow />
+          </>
+        )}
+        
+        {/* Simplified lighting for mobile */}
+        {deviceConfig.isMobile && (
+          <>
+            <directionalLight position={[5, 5, 5]} intensity={0.8} />
+            <pointLight position={[3, -2, 3]} intensity={1.5} color={COLOR_B} />
+          </>
+        )}
         
         <Stars 
           radius={100} 
           depth={50} 
-          count={5000} 
-          factor={5} 
+          count={starCount}
+          factor={deviceConfig.isMobile ? 3 : 5}
           saturation={0} 
           fade 
-          speed={0.4}
+          speed={deviceConfig.isMobile ? 0.2 : 0.4}
         />
 
-        <Float
-          speed={1.5}
-          rotationIntensity={0.3}
-          floatIntensity={0.4}
-        >
-          <Sparkles
-            count={80}
-            scale={12}
-            size={2.5}
-            speed={0.4}
-            opacity={0.5}
-            color={COLOR_B}
-            renderOrder={10}
-          />
-        </Float>
+        {/* Sparkles - reduced or removed on mobile */}
+        {!deviceConfig.isMobile && (
+          <Float
+            speed={1.5}
+            rotationIntensity={0.3}
+            floatIntensity={0.4}
+          >
+            <Sparkles
+              count={sparkleCount}
+              scale={12}
+              size={2.5}
+              speed={0.4}
+              opacity={0.5}
+              color={COLOR_B}
+              renderOrder={10}
+            />
+          </Float>
+        )}
         
-        <ParticleSwarm mousePosition={mousePosition} />
+        <ParticleSwarm mousePosition={mousePosition} numParticles={numParticles} />
         
-        <Float
-          speed={2}
-          rotationIntensity={0.5}
-          floatIntensity={0.3}
-        >
-          <group position={[3.5, -2.5, -0.5]} rotation={[0.3, -0.8, 0.1]} scale={50}>
-            <CircuitFab />
-            <hemisphereLight intensity={1.5} groundColor="#000000" color="#ffffff" />
-          </group>
-        </Float>
+        {/* CircuitFab model - simplified or hidden on mobile */}
+        {!deviceConfig.isMobile && (
+          <Float
+            speed={2}
+            rotationIntensity={0.5}
+            floatIntensity={0.3}
+          >
+            <group position={[3.5, -2.5, -0.5]} rotation={[0.3, -0.8, 0.1]} scale={50}>
+              <CircuitFab />
+              <hemisphereLight intensity={1.5} groundColor="#000000" color="#ffffff" />
+            </group>
+          </Float>
+        )}
 
-        <CameraRig />
+        {/* Simplified CircuitFab for tablets */}
+        {deviceConfig.isTablet && (
+          <Float
+            speed={1.5}
+            rotationIntensity={0.3}
+            floatIntensity={0.2}
+          >
+            <group position={[3.5, -2.5, -0.5]} rotation={[0.3, -0.8, 0.1]} scale={40}>
+              <CircuitFab />
+              <hemisphereLight intensity={1.2} groundColor="#000000" color="#ffffff" />
+            </group>
+          </Float>
+        )}
+
+        {/* Only apply camera rig on desktop for smoother performance */}
+        {deviceConfig.isDesktop && <CameraRig />}
       </Canvas>
     </div>
   );
