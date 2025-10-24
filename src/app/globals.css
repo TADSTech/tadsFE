@@ -209,38 +209,34 @@
 
   /* Typewriter Effect */
   .typewriter-cursor {
-    position: relative;
-    width: 24em;
-    margin: 0 auto;
+    display: inline-block;
     border-right: 2px solid var(--secondary);
-    font-family: var(--font-poppins);
-    font-weight: 600;
-    font-size: 30px;
-    text-align: center;
     white-space: nowrap;
     overflow: hidden;
-    transform: translateY(-50%);
-    color: var(--foreground);
-    background: linear-gradient(135deg, var(--foreground) 0%, var(--secondary) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
   }
 
   .typewriter-animation {
     animation: 
-      typewriter 5s steps(50) 1s 1 normal both, 
-      blinkingCursor 500ms steps(50) infinite normal;
+      typewriter 4s steps(40) 0.5s 1 normal both, 
+      blinkingCursor 500ms steps(44) 8;
   }
 
   @keyframes typewriter {
-    from { width: 0; }
-    to { width: 100%; }
+    from { 
+      width: 0; 
+    }
+    to { 
+      width: 100%; 
+    }
   }
 
   @keyframes blinkingCursor {
-    from { border-right-color: var(--secondary); }
-    to { border-right-color: transparent; }
+    from { 
+      border-right-color: var(--secondary); 
+    }
+    to { 
+      border-right-color: transparent; 
+    }
   }
 
 }
