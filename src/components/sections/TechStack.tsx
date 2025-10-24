@@ -23,8 +23,8 @@ import {
 
 export const TechStack: React.FC = () => {
     // ============================================================
-    // TECHNOLOGY DATA STRUCTURE
-    // Organized by category for better UX and SEO
+    // TECHNOLOGY DS
+    // Organized by category
     // Each technology includes: name, icon, and brand color
     // ============================================================
     
