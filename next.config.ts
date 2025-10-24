@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   /* Export static */
   output: 'export',
   reactCompiler: true,
+  trailingSlash: true,
 
   images: {
     unoptimized: true,

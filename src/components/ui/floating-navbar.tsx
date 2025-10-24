@@ -3,7 +3,7 @@ import React, { JSX, useState, useEffect, useRef } from "react";
 import {
   motion,
   AnimatePresence,
-  useScroll,
+  useScroll, 
   useMotionValueEvent,
 } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -125,7 +125,7 @@ export const FloatingNav = ({
             <span className="hidden sm:block text-sm md:text-base">{navItem.name}</span>
           </a>
         ))}
-        <Link href="/contact" className="ml-auto">
+        <Link href="/contact/" className="ml-auto">
               <button className="border text-sm md:text-base font-medium relative border-neutral-200 dark:border-white/20 text-black dark:text-white px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-secondary hover:border-secondary hover:text-secondary-foreground transition-colors glow-on-hover">
                 <span>Contact</span>
                 <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-linear-to-r from-transparent via-blue-500 to-transparent  h-px" />

@@ -111,7 +111,7 @@ export const Hero: React.FC = () => {
                     </Link>
 
                     {/* Secondary CTA - Contact form */}
-                    <Link href="/contact" className="w-full sm:w-auto">
+                    <Link href="/contact/" className="w-full sm:w-auto">
                         <button 
                             className="regular-hover w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border border-foreground/20 rounded-lg bg-transparent text-foreground hover:border-secondary transition-all text-sm sm:text-base"
                             aria-label="Get in touch with us"

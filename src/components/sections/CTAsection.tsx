@@ -180,7 +180,7 @@ export const CTASection: React.FC = () => {
                                 transition={{ duration: 0.6, delay: isMobile ? 0.3 : 0.6 }}
                                 className="flex flex-col sm:flex-row gap-4 pt-2 sm:pt-4"
                             >
-                                <Link href="/contact" aria-label="Get started with TADS Tech - Contact us for web development services">
+                                <Link href="/contact/" aria-label="Get started with TADS Tech - Contact us for web development services">
                                     <div className="relative group cursor-pointer">
                                         {/* Glowing effect - disabled on mobile for performance */}
                                         {!isMobile && (
