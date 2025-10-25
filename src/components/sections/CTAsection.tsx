@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { GlowingEffect } from "../ui/glowing-effect";
 import { AuroraBackground } from "../ui/aurora-background";
-import { ArrowRight, Sparkles, Zap, Globe as GlobeIcon, Code2 } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Globe as GlobeIcon, Code2, Download } from "lucide-react";
 import Link from "next/link";
 
 export const CTASection: React.FC = () => {
@@ -201,6 +201,18 @@ export const CTASection: React.FC = () => {
                                         </button>
                                     </div>
                                 </Link>
+
+                                {/* CV Download Button - Transparent with white border */}
+                                <a 
+                                    href="/TADSFE-CV-FULL.pdf" 
+                                    download
+                                    aria-label="Download Resume"
+                                >
+                                    <button className="relative w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-transparent text-foreground border-2 border-white/80 font-mono font-bold text-base sm:text-lg rounded-xl hover:bg-white/10 hover:border-white transition-all duration-300 flex items-center justify-center gap-3 group">
+                                        <Download className="w-5 h-5 group-hover:translate-y-0.5 transition-transform duration-300" />
+                                        <span>Download CV</span>
+                                    </button>
+                                </a>
                             </motion.div>
 
                             {/* Trust Indicators - Social proof metrics */}
