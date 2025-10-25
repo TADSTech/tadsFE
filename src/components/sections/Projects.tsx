@@ -1,155 +1,82 @@
+"use client";
 import React from "react";
 import { motion } from "motion/react";
 import { TextHoverEffect } from "../ui/text-hover-effect";
-import { LayoutGrid } from "../ui/layout-grid";
-import { GlowingEffect } from "../ui/glowing-effect";
-import { ExternalLink, Github } from "lucide-react";
+import { CardSpotlight } from "../ui/card-spotlight";
+import { ExternalLink, Github, Code2, Layers, Database, Zap } from "lucide-react";
+import { g } from "motion/react-client";
 
 export const Projects: React.FC = () => {
     const projects = [
         {
             id: 1,
-            className: "md:col-span-2",
-            thumbnail: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80",
-            content: (
-                <div>
-                    <p className="font-header text-2xl md:text-3xl text-white mb-2">
-                        E-Commerce Platform
-                    </p>
-                    <p className="font-mono text-sm text-white/80 mb-4">
-                        Modern e-commerce solution built with Next.js, React, and Stripe integration. 
-                        Features include real-time inventory, cart management, and secure checkout.
-                    </p>
-                    <div className="flex gap-4 mb-4">
-                        <span className="text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary border border-secondary/30">
-                            Next.js
-                        </span>
-                        <span className="text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary border border-secondary/30">
-                            TypeScript
-                        </span>
-                        <span className="text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary border border-secondary/30">
-                            Tailwind
-                        </span>
-                    </div>
-                    <div className="flex gap-4">
-                        <a href="#" className="flex items-center gap-2 text-white hover:text-secondary transition-colors text-sm">
-                            <Github className="w-4 h-4" />
-                            <span>Code</span>
-                        </a>
-                        <a href="#" className="flex items-center gap-2 text-white hover:text-secondary transition-colors text-sm">
-                            <ExternalLink className="w-4 h-4" />
-                            <span>Live Demo</span>
-                        </a>
-                    </div>
-                </div>
-            ),
+            title: "TADS | FE",
+            description: "Modern interactive portfolio website built with Next.js, React, and Tailwind CSS. Showcases 3D graphics and responsive design for TADS|FE",
+            icon: Layers,
+            technologies: ["Next.js", "TypeScript", "Tailwind", "R3F", "GLSL", "Three.js"],
+            links: {
+                github: "https://github.com/TADSTech/tadsFE",
+            },
+            stats: {
+                label: "Design",
+                value: "Minimalist"
+            }
         },
         {
             id: 2,
-            className: "col-span-1",
-            thumbnail: "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=800&q=80",
-            content: (
-                <div>
-                    <p className="font-header text-xl md:text-2xl text-white mb-2">
-                        3D Portfolio
-                    </p>
-                    <p className="font-mono text-sm text-white/80 mb-4">
-                        Interactive 3D portfolio using Three.js and React Three Fiber. 
-                        Immersive user experience with custom shaders.
-                    </p>
-                    <div className="flex gap-2 mb-4 flex-wrap">
-                        <span className="text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary border border-secondary/30">
-                            R3F
-                        </span>
-                        <span className="text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary border border-secondary/30">
-                            Three.js
-                        </span>
-                    </div>
-                    <div className="flex gap-4">
-                        <a href="#" className="flex items-center gap-2 text-white hover:text-secondary transition-colors text-sm">
-                            <ExternalLink className="w-4 h-4" />
-                            <span>View</span>
-                        </a>
-                    </div>
-                </div>
-            ),
+            title: "TADSTech website",
+            description: "The average data scientist main portfolio website built with Vite, React, and MUI. Showcases projects and skills with a clean, professional design.",
+            icon: Code2,
+            technologies: ["Vite", "React", "MUI"],
+            links: {
+                demo: "https://tadstech.web.app",
+                github: "https://github.com/TADSTech/tadstech"  
+            },
+            stats: {
+                label: "UI",
+                value: "Clean"
+            }
         },
         {
             id: 3,
-            className: "col-span-1",
-            thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-            content: (
-                <div>
-                    <p className="font-header text-xl md:text-2xl text-white mb-2">
-                        Data Dashboard
-                    </p>
-                    <p className="font-mono text-sm text-white/80 mb-4">
-                        Analytics dashboard with real-time data visualization using Python backend 
-                        and React frontend.
-                    </p>
-                    <div className="flex gap-2 mb-4 flex-wrap">
-                        <span className="text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary border border-secondary/30">
-                            React
-                        </span>
-                        <span className="text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary border border-secondary/30">
-                            Python
-                        </span>
-                        <span className="text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary border border-secondary/30">
-                            D3.js
-                        </span>
-                    </div>
-                    <div className="flex gap-4">
-                        <a href="#" className="flex items-center gap-2 text-white hover:text-secondary transition-colors text-sm">
-                            <Github className="w-4 h-4" />
-                            <span>Code</span>
-                        </a>
-                    </div>
-                </div>
-            ),
+            title: "SalesScope",
+            description: "SalesScope is a lightweight sales analytics platform that showcases how businesses can track, explore, and visualize sales performance. It combines a Python backend (for generating and cleaning realistic sales datasets) with a React + TypeScript frontend (for dashboards, KPIs, and interactive charts).",
+            icon: Database,
+            technologies: ["React", "Python", "Plotly.js", "WebSocket"],
+            links: {
+                github: "https://github.com/TADSTech/sales-scope",
+                demo: "https://salesscope.web.app"
+            },
+            stats: {
+                label: "Data Points",
+                value: "100k+"
+            }
         },
         {
             id: 4,
-            className: "md:col-span-2",
-            thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-            content: (
-                <div>
-                    <p className="font-header text-2xl md:text-3xl text-white mb-2">
-                        SaaS Platform
-                    </p>
-                    <p className="font-mono text-sm text-white/80 mb-4">
-                        Full-stack SaaS application with authentication, subscription management, 
-                        and cloud deployment. Built for scalability and performance.
-                    </p>
-                    <div className="flex gap-4 mb-4 flex-wrap">
-                        <span className="text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary border border-secondary/30">
-                            Next.js
-                        </span>
-                        <span className="text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary border border-secondary/30">
-                            Prisma
-                        </span>
-                        <span className="text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary border border-secondary/30">
-                            PostgreSQL
-                        </span>
-                        <span className="text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary border border-secondary/30">
-                            Stripe
-                        </span>
-                    </div>
-                    <div className="flex gap-4">
-                        <a href="#" className="flex items-center gap-2 text-white hover:text-secondary transition-colors text-sm">
-                            <ExternalLink className="w-4 h-4" />
-                            <span>Live Demo</span>
-                        </a>
-                    </div>
-                </div>
-            ),
+            title: "ReactiveNotes",
+            description: "A simple note-taking application. Built for scalability and performance.",
+            icon: Zap,
+            technologies: ["React", "CSS", "HTML"],
+            links: {
+                demo: "https://reactionnotes.web.app/",
+                github: "https://github.com/TADSTech/ReactiveNotes"
+            },
+            stats: {
+                label: "Uptime",
+                value: "99.9%"
+            }
         },
     ];
 
     return (
-        <section id="projects" className="min-h-screen bg-background py-20 px-6 relative overflow-hidden">
+        <section id="projects" className="min-h-screen bg-background py-12 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
+            {/* Background decoration */}
+            <div className="absolute inset-0 bg-linear-to-b from-background via-secondary/5 to-background pointer-events-none" />
+            
             {/* Title Section */}
             <div className="max-w-7xl mx-auto relative z-20">
-                <div className="h-48 flex items-center justify-center mb-8">
+                <div className="h-32 sm:h-48 flex items-center justify-center mb-8">
                     <TextHoverEffect text="PROJECTS" duration={2} />
                 </div>
 
@@ -159,40 +86,98 @@ export const Projects: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="max-w-3xl mx-auto text-center mb-16"
+                    className="max-w-3xl mx-auto text-center mb-12 sm:mb-16"
                 >
-                    <p className="text-base md:text-lg text-foreground/80 leading-relaxed font-mono mb-4">
+                    <p className="text-sm sm:text-base md:text-lg text-foreground/80 leading-relaxed font-mono mb-4">
                         A selection of projects showcasing my expertise in modern web development, 
                         3D graphics, and data visualization.
                     </p>
-                    <p className="text-sm text-foreground/60 font-mono italic">
-                        Click on any project to explore details
+                    <p className="text-xs sm:text-sm text-foreground/60 font-mono italic">
+                        Hover over cards to see interactive effects
                     </p>
                 </motion.div>
             </div>
 
-            {/* Projects Grid with Glowing Effect */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative z-20"
-            >
-                <div className="relative max-w-7xl mx-auto">
-                    {/* Glowing border effect */}
-                    <div className="relative rounded-3xl border border-foreground/10 bg-background/50 backdrop-blur-sm p-4">
-                        <GlowingEffect
-                            blur={20}
-                            spread={80}
-                            proximity={100}
-                            borderWidth={2}
-                            disabled={false}
-                        />
-                        <LayoutGrid cards={projects} />
-                    </div>
+            {/* Projects Grid */}
+            <div className="max-w-7xl mx-auto relative z-20">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                    {projects.map((project, index) => (
+                        <motion.div
+                            key={project.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                        >
+                            <CardSpotlight className="h-full">
+                                <div className="relative z-20 p-6 sm:p-8 flex flex-col h-full">
+                                    {/* Icon & Title */}
+                                    <div className="flex items-start gap-4 mb-4">
+                                        <div className="p-3 rounded-xl bg-secondary/10 border border-secondary/30">
+                                            <project.icon className="w-6 h-6 sm:w-7 sm:h-7 text-secondary" />
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className="font-header text-xl sm:text-2xl md:text-3xl text-foreground mb-2">
+                                                {project.title}
+                                            </h3>
+                                        </div>
+                                    </div>
+
+                                    {/* Description */}
+                                    <p className="text-sm sm:text-base text-foreground/70 font-mono leading-relaxed mb-6 flex-1">
+                                        {project.description}
+                                    </p>
+
+                                    {/* Technologies */}
+                                    <div className="flex flex-wrap gap-2 mb-6">
+                                        {project.technologies.map((tech) => (
+                                            <span
+                                                key={tech}
+                                                className="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-secondary/10 text-secondary border border-secondary/30 font-mono"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    {/* Stats & Links */}
+                                    <div className="flex items-center justify-between pt-4 border-t border-foreground/10">
+                                        <div className="flex flex-col">
+                                            <span className="text-xs text-foreground/50 font-mono">
+                                                {project.stats.label}
+                                            </span>
+                                            <span className="text-lg sm:text-xl font-header text-secondary">
+                                                {project.stats.value}
+                                            </span>
+                                        </div>
+                                        
+                                        <div className="flex gap-3">
+                                            {project.links.github && (
+                                                <a
+                                                    href={project.links.github}
+                                                    className="p-2 rounded-lg bg-foreground/5 hover:bg-secondary/10 border border-foreground/10 hover:border-secondary/30 transition-all group"
+                                                    aria-label="View source code"
+                                                >
+                                                    <Github className="w-4 h-4 sm:w-5 sm:h-5 text-foreground/70 group-hover:text-secondary transition-colors" />
+                                                </a>
+                                            )}
+                                            {project.links.demo && (
+                                                <a
+                                                    href={project.links.demo}
+                                                    className="p-2 rounded-lg bg-foreground/5 hover:bg-secondary/10 border border-foreground/10 hover:border-secondary/30 transition-all group"
+                                                    aria-label="View live demo"
+                                                >
+                                                    <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-foreground/70 group-hover:text-secondary transition-colors" />
+                                                </a>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </CardSpotlight>
+                        </motion.div>
+                    ))}
                 </div>
-            </motion.div>
+            </div>
 
             {/* Stats Section */}
             <motion.div
@@ -200,9 +185,9 @@ export const Projects: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="max-w-4xl mx-auto mt-20 relative z-20"
+                className="max-w-5xl mx-auto mt-12 sm:mt-20 relative z-20"
             >
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                     {[
                         { label: "Projects", value: "5+" },
                         { label: "Technologies", value: "10+" },
@@ -215,23 +200,17 @@ export const Projects: React.FC = () => {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
-                            className="relative group"
                         >
-                            <div className="relative p-6 rounded-xl border border-foreground/10 bg-background/80 backdrop-blur-sm hover:border-secondary/50 transition-all duration-300 text-center">
-                                <GlowingEffect
-                                    blur={15}
-                                    spread={60}
-                                    proximity={80}
-                                    borderWidth={1}
-                                    disabled={false}
-                                />
-                                <div className="font-header text-3xl md:text-4xl text-secondary mb-2">
-                                    {stat.value}
+                            <CardSpotlight radius={200}>
+                                <div className="relative p-4 sm:p-6 text-center">
+                                    <div className="font-header text-2xl sm:text-3xl md:text-4xl text-secondary mb-1 sm:mb-2">
+                                        {stat.value}
+                                    </div>
+                                    <div className="text-xs sm:text-sm text-foreground/60 font-mono">
+                                        {stat.label}
+                                    </div>
                                 </div>
-                                <div className="text-xs md:text-sm text-foreground/60 font-mono">
-                                    {stat.label}
-                                </div>
-                            </div>
+                            </CardSpotlight>
                         </motion.div>
                     ))}
                 </div>

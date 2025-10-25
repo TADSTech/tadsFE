@@ -59,23 +59,32 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
 };
 
 const ImageComponent = ({ card }: { card: Card }) => {
+  const [imageError, setImageError] = useState(false);
+  
   return (
-    <motion.img
-      layoutId={`image-${card.id}-image`}
-      src={card.thumbnail}
-      height="500"
-      width="500"
-      className={cn(
-        "object-cover object-top absolute inset-0 h-full w-full transition duration-200"
+    <>
+      {!imageError ? (
+        <motion.img
+          layoutId={`image-${card.id}-image`}
+          src={card.thumbnail}
+          height="500"
+          width="500"
+          className={cn(
+            "object-cover object-top absolute inset-0 h-full w-full transition duration-200"
+          )}
+          alt="thumbnail"
+          onError={() => setImageError(true)}
+        />
+      ) : (
+        <div className="absolute inset-0 h-full w-full bg-linear-to-br from-secondary/20 to-secondary/5" />
       )}
-      alt="thumbnail"
-    />
+    </>
   );
 };
 
 const SelectedCard = ({ selected }: { selected: Card | null }) => {
   return (
-    <div className="bg-transparent h-full w-full flex flex-col justify-end rounded-lg shadow-2xl relative z-[60]">
+    <div className="bg-transparent h-full w-full flex flex-col justify-end rounded-lg shadow-2xl relative z-60">
       <motion.div
         initial={{
           opacity: 0,
@@ -103,7 +112,7 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
           duration: 0.3,
           ease: "easeInOut",
         }}
-        className="relative px-8 pb-4 z-[70]"
+        className="relative px-8 pb-4 z-70"
       >
         {selected?.content}
       </motion.div>
