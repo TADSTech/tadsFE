@@ -1,12 +1,26 @@
+/**
+ * ============================================================
+ * PROJECTS SHOWCASE SECTION
+ * ============================================================
+ * Purpose: Portfolio display with interactive cards
+ * SEO: Rich project metadata, external links for authority
+ * Features: CardSpotlight hover effects, tech stack badges
+ * Mobile: Fully responsive grid, touch-friendly interactions
+ * ============================================================
+ */
+
 "use client";
 import React from "react";
 import { motion } from "motion/react";
 import { TextHoverEffect } from "../ui/text-hover-effect";
 import { CardSpotlight } from "../ui/card-spotlight";
 import { ExternalLink, Github, Code2, Layers, Database, Zap } from "lucide-react";
-import { g } from "motion/react-client";
 
 export const Projects: React.FC = () => {
+    // ============================================================
+    // PROJECT DATA - Portfolio items with SEO-rich descriptions
+    // ============================================================
+    
     const projects = [
         {
             id: 1,
@@ -70,17 +84,35 @@ export const Projects: React.FC = () => {
     ];
 
     return (
-        <section id="projects" className="min-h-screen bg-background py-12 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
-            {/* Background decoration */}
-            <div className="absolute inset-0 bg-linear-to-b from-background via-secondary/5 to-background pointer-events-none" />
+        <section 
+            id="projects" 
+            className="min-h-screen bg-background py-12 sm:py-20 px-4 sm:px-6 relative overflow-hidden"
+            aria-label="Portfolio projects showcase"
+        >
+            {/* ============================================================ */}
+            {/* BACKGROUND DECORATION - Subtle gradient layer */}
+            {/* ============================================================ */}
             
-            {/* Title Section */}
+            <div className="absolute inset-0 bg-linear-to-b from-background via-secondary/5 to-background pointer-events-none" aria-hidden="true" />
+            
+            {/* ============================================================ */}
+            {/* SEO: Hidden heading for search engines and screen readers */}
+            {/* ============================================================ */}
+            
+            <h2 className="sr-only">
+                Web Development Projects - Next.js, React, Three.js Portfolio
+            </h2>
+            
+            {/* ============================================================ */}
+            {/* TITLE SECTION - Animated heading */}
+            {/* ============================================================ */}
+            
             <div className="max-w-7xl mx-auto relative z-20">
                 <div className="h-32 sm:h-48 flex items-center justify-center mb-8">
                     <TextHoverEffect text="PROJECTS" duration={2} />
                 </div>
 
-                {/* Intro */}
+                {/* Introduction text - SEO context */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -98,9 +130,17 @@ export const Projects: React.FC = () => {
                 </motion.div>
             </div>
 
-            {/* Projects Grid */}
+            {/* ============================================================ */}
+            {/* PROJECTS GRID - Portfolio cards with CardSpotlight effects */}
+            {/* SEO: role="list" helps crawlers understand structure */}
+            {/* ============================================================ */}
+            
             <div className="max-w-7xl mx-auto relative z-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                <div 
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
+                    role="list"
+                    aria-label="Project portfolio grid"
+                >
                     {projects.map((project, index) => (
                         <motion.div
                             key={project.id}
@@ -108,12 +148,19 @@ export const Projects: React.FC = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
+                            role="listitem"
                         >
                             <CardSpotlight className="h-full">
-                                <div className="relative z-20 p-6 sm:p-8 flex flex-col h-full">
-                                    {/* Icon & Title */}
+                                <article className="relative z-20 p-6 sm:p-8 flex flex-col h-full">
+                                    {/* ======================================== */}
+                                    {/* PROJECT HEADER - Icon & Title */}
+                                    {/* ======================================== */}
+                                    
                                     <div className="flex items-start gap-4 mb-4">
-                                        <div className="p-3 rounded-xl bg-secondary/10 border border-secondary/30">
+                                        <div 
+                                            className="p-3 rounded-xl bg-secondary/10 border border-secondary/30"
+                                            aria-hidden="true"
+                                        >
                                             <project.icon className="w-6 h-6 sm:w-7 sm:h-7 text-secondary" />
                                         </div>
                                         <div className="flex-1">
@@ -123,24 +170,36 @@ export const Projects: React.FC = () => {
                                         </div>
                                     </div>
 
-                                    {/* Description */}
+                                    {/* Project description - SEO keyword rich */}
                                     <p className="text-sm sm:text-base text-foreground/70 font-mono leading-relaxed mb-6 flex-1">
                                         {project.description}
                                     </p>
 
-                                    {/* Technologies */}
-                                    <div className="flex flex-wrap gap-2 mb-6">
+                                    {/* ======================================== */}
+                                    {/* TECH STACK BADGES - SEO visibility */}
+                                    {/* ======================================== */}
+                                    
+                                    <div 
+                                        className="flex flex-wrap gap-2 mb-6"
+                                        role="list"
+                                        aria-label={`Technologies used in ${project.title}`}
+                                    >
                                         {project.technologies.map((tech) => (
                                             <span
                                                 key={tech}
                                                 className="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-secondary/10 text-secondary border border-secondary/30 font-mono"
+                                                role="listitem"
                                             >
                                                 {tech}
                                             </span>
                                         ))}
                                     </div>
 
-                                    {/* Stats & Links */}
+                                    {/* ======================================== */}
+                                    {/* PROJECT METADATA - Stats & Links */}
+                                    {/* SEO: External links boost authority */}
+                                    {/* ======================================== */}
+                                    
                                     <div className="flex items-center justify-between pt-4 border-t border-foreground/10">
                                         <div className="flex flex-col">
                                             <span className="text-xs text-foreground/50 font-mono">
@@ -151,12 +210,14 @@ export const Projects: React.FC = () => {
                                             </span>
                                         </div>
                                         
-                                        <div className="flex gap-3">
+                                        <div className="flex gap-3" role="group" aria-label="Project links">
                                             {project.links.github && (
                                                 <a
                                                     href={project.links.github}
                                                     className="p-2 rounded-lg bg-foreground/5 hover:bg-secondary/10 border border-foreground/10 hover:border-secondary/30 transition-all group"
-                                                    aria-label="View source code"
+                                                    aria-label={`View ${project.title} source code on GitHub`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
                                                 >
                                                     <Github className="w-4 h-4 sm:w-5 sm:h-5 text-foreground/70 group-hover:text-secondary transition-colors" />
                                                 </a>
@@ -165,27 +226,35 @@ export const Projects: React.FC = () => {
                                                 <a
                                                     href={project.links.demo}
                                                     className="p-2 rounded-lg bg-foreground/5 hover:bg-secondary/10 border border-foreground/10 hover:border-secondary/30 transition-all group"
-                                                    aria-label="View live demo"
+                                                    aria-label={`View ${project.title} live demo`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
                                                 >
                                                     <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-foreground/70 group-hover:text-secondary transition-colors" />
                                                 </a>
                                             )}
                                         </div>
                                     </div>
-                                </div>
+                                </article>
                             </CardSpotlight>
                         </motion.div>
                     ))}
                 </div>
             </div>
 
-            {/* Stats Section */}
+            {/* ============================================================ */}
+            {/* PORTFOLIO STATS - Achievement metrics */}
+            {/* SEO: Quantifiable metrics build credibility */}
+            {/* ============================================================ */}
+            
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="max-w-5xl mx-auto mt-12 sm:mt-20 relative z-20"
+                role="region"
+                aria-label="Portfolio statistics"
             >
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                     {[
@@ -202,8 +271,15 @@ export const Projects: React.FC = () => {
                             transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
                         >
                             <CardSpotlight radius={200}>
-                                <div className="relative p-4 sm:p-6 text-center">
-                                    <div className="font-header text-2xl sm:text-3xl md:text-4xl text-secondary mb-1 sm:mb-2">
+                                <div 
+                                    className="relative p-4 sm:p-6 text-center"
+                                    role="group"
+                                    aria-label={`${stat.value} ${stat.label}`}
+                                >
+                                    <div 
+                                        className="font-header text-2xl sm:text-3xl md:text-4xl text-secondary mb-1 sm:mb-2"
+                                        aria-hidden="true"
+                                    >
                                         {stat.value}
                                     </div>
                                     <div className="text-xs sm:text-sm text-foreground/60 font-mono">
