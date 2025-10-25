@@ -124,8 +124,6 @@
   }
 
   .glow-on-hover {
-    width: 100px;
-    height: 50px;
     border: none;
     outline: none;
     color: var(--foreground);
@@ -234,24 +232,36 @@
   .typewriter-animation {
     animation: 
       typewriter 4s steps(40) 0.5s 1 normal both, 
-      blinkingCursor 500ms steps(44) 8;
+      blinkingCursor 500ms steps(44) infinite;
+    animation-fill-mode: forwards;
   }
 
   @keyframes typewriter {
     from { 
-      width: 0; 
+      max-width: 0; 
     }
     to { 
-      width: 100%; 
+      max-width: fit-content; 
     }
   }
 
   @keyframes blinkingCursor {
-    from { 
+    0%, 100% { 
       border-right-color: var(--secondary); 
     }
-    to { 
+    50% { 
       border-right-color: transparent; 
+    }
+  }
+  
+  .typewriter-animation::after {
+    content: '';
+    animation: hideCursor 0s 4.5s forwards;
+  }
+  
+  @keyframes hideCursor {
+    to {
+      border-right-color: transparent;
     }
   }
 

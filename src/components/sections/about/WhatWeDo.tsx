@@ -1,68 +1,40 @@
 "use client"
 
 import React from "react"
-import { TextHoverEffect } from "@/components/ui/text-hover-effect"
-import { CardSpotlight } from "@/components/ui/card-spotlight"
+import { SectionTitle } from "@/components/ui/section-title"
 import { motion } from "motion/react"
-import { Palette, Zap, Blocks, Workflow } from "lucide-react"
+import { Layout, Gauge, Code, Link } from "lucide-react"
 
 export const WhatWeDo: React.FC = () => {
-    // ============================================================
-    // SERVICES DATA
-    // ============================================================
-    
     const services = [
         {
-            icon: Palette,
-            title: "UI/UX Design",
-            description: "Crafting intuitive interfaces that balance aesthetics with functionality and user needs."
+            icon: Layout,
+            title: "Design that works",
+            description: "Interfaces that look good and actually make sense to use."
         },
         {
-            icon: Zap,
-            title: "Performance Optimization",
-            description: "Building lightning-fast applications that deliver exceptional user experiences."
+            icon: Gauge,
+            title: "Make it fast",
+            description: "Nobody likes waiting. I optimize until it's smooth."
         },
         {
-            icon: Blocks,
-            title: "Component Architecture",
-            description: "Developing reusable, scalable component systems for modern web applications."
+            icon: Code,
+            title: "Build it right",
+            description: "Components that scale. Code that doesn't break when you touch it."
         },
         {
-            icon: Workflow,
-            title: "Full-Stack Integration",
-            description: "Seamlessly connecting frontends with backends and third-party services."
+            icon: Link,
+            title: "Connect the dots",
+            description: "APIs, databases, third-party tools. Whatever needs to talk, I make it work."
         }
     ]
-
-    const RightIcon = services[services.length - 1].icon
-
-    // ============================================================
-    // RENDER
-    // ============================================================
 
     return(
         <section id="what-we-do" className="min-h-screen bg-background py-12 sm:py-20 px-4 sm:px-6">
             <div className="max-w-6xl mx-auto">
-                {/* ============================================================ */}
-                {/* SECTION TITLE */}
-                {/* ============================================================ */}
-                
-                <motion.div
-                    initial={{ opacity: 0, scale: 1.2 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="h-24 sm:h-32 md:h-40 lg:h-48 flex items-center justify-center mb-6 sm:mb-8 md:mb-12"
-                    >
-                    <div className="w-4/5 sm:w-3/4 md:w-2/3 aspect-3/1">
-                        <TextHoverEffect text="WHAT WE DO" duration={2} />
-                    </div>
-                </motion.div>   
+                <SectionTitle text="WHAT WE DO" duration={2} />
 
-                {/* ============================================================ */}
-                {/* INTRODUCTION TEXT */}
-                {/* ============================================================ */}
-
-                <div className="max-w-3xl mx-auto text-center mb-16">
+                <div className="max-w-3xl mx-auto mb-16 sm:mb-20">
                     <motion.p 
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -70,9 +42,8 @@ export const WhatWeDo: React.FC = () => {
                         transition={{ duration: 0.6 }}
                         className="text-base md:text-lg text-foreground/80 leading-relaxed mb-6 font-mono"
                     >
-                        We specialize in modern frontend development with a focus on creating performant, 
-                        accessible, and visually striking web applications. From concept to deployment, 
-                        we handle every aspect of the frontend experience.
+                        Frontend development. Design systems. Performance tuning. The usual stuff, 
+                        but done well.
                     </motion.p>
                     
                     <motion.p 
@@ -82,75 +53,42 @@ export const WhatWeDo: React.FC = () => {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="text-sm md:text-base text-foreground/60 leading-relaxed font-mono"
                     >
-                        Our services blend technical expertise with creative vision to deliver 
-                        solutions that exceed expectations.
+                        If it needs to run in a browser, I can probably build it.
                     </motion.p>
                 </div>
 
-                {/* ============================================================ */}
-                {/* SERVICES CARDS */}
-                {/* ============================================================ */}
-
-                <div className="flex flex-col lg:flex-row-reverse gap-6 max-w-7xl mx-auto">
-                    {/* Featured Service Card */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="lg:w-1/3"
-                    >
-                        <CardSpotlight 
-                            radius={320}
-                            color="#134a87"
-                            className="h-full p-10 border-foreground/10 bg-background/50 backdrop-blur-sm hover:border-secondary/50 transition-all duration-300 group"
-                        >
-                            <div className="relative z-10 h-full flex flex-col justify-center">
-                                <div className="mb-8 text-secondary group-hover:scale-110 transition-transform duration-300 inline-block">
-                                    <RightIcon className="w-14 h-14" strokeWidth={1.5} />
-                                </div>
-                                <h3 className="font-header text-2xl mb-4 text-foreground group-hover:text-secondary transition-colors duration-300">
-                                    {services[services.length - 1].title}
-                                </h3>
-                                <div className="w-16 h-0.5 bg-secondary/30 mb-6 group-hover:w-24 group-hover:bg-secondary transition-all duration-300" />
-                                <p className="text-base text-foreground/70 leading-relaxed font-mono">
-                                    {services[services.length - 1].description}
-                                </p>
-                            </div>
-                        </CardSpotlight>
-                    </motion.div>
-
-                    {/* Additional Services Grid */}
-                    <div className="lg:w-2/3 grid grid-cols-1 gap-6">
-                        {services.slice(0, -1).map((service, index) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
+                    {services.map((item, index) => {
+                        const Icon = item.icon
+                        return (
                             <motion.div
-                                key={service.title}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                key={item.title}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="group relative overflow-hidden"
                             >
-                                <CardSpotlight 
-                                    radius={280}
-                                    color="#134a87"
-                                    className="h-full p-8 border-foreground/10 bg-background/50 backdrop-blur-sm hover:border-secondary/50 transition-all duration-300 group"
-                                >
-                                    <div className="relative z-10 h-full flex flex-col">
-                                        <div className="mb-6 text-secondary group-hover:scale-110 transition-transform duration-300 inline-block">
-                                            <service.icon className="w-10 h-10" strokeWidth={1.5} />
-                                        </div>
-                                        <h3 className="font-header text-xl mb-3 text-foreground group-hover:text-secondary transition-colors duration-300">
-                                            {service.title}
-                                        </h3>
-                                        <div className="w-12 h-0.5 bg-secondary/30 mb-4 group-hover:w-20 group-hover:bg-secondary transition-all duration-300" />
-                                        <p className="text-sm md:text-base text-foreground/70 leading-relaxed font-mono grow">
-                                            {service.description}
-                                        </p>
+                                <div className="absolute -inset-1 bg-linear-to-br from-secondary/10 via-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 blur-xl" />
+                                
+                                <div className="relative p-8 sm:p-10 rounded-lg border border-foreground/5 group-hover:border-secondary/20 transition-all duration-500">
+                                    <div className="mb-6 text-secondary/70 group-hover:text-secondary transition-colors duration-300">
+                                        <Icon className="w-10 h-10 sm:w-12 sm:h-12" strokeWidth={1.5} />
                                     </div>
-                                </CardSpotlight>
+                                    
+                                    <h3 className="font-header text-xl sm:text-2xl text-foreground mb-4 group-hover:translate-x-1 transition-transform duration-300">
+                                        {item.title}
+                                    </h3>
+                                    
+                                    <p className="text-sm sm:text-base text-foreground/60 leading-relaxed font-mono">
+                                        {item.description}
+                                    </p>
+                                    
+                                    <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-linear-to-r from-secondary to-transparent group-hover:w-full transition-all duration-700" />
+                                </div>
                             </motion.div>
-                        ))}
-                    </div>
+                        )
+                    })}
                 </div>
             </div>
         </section>

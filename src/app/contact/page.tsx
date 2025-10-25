@@ -6,7 +6,6 @@ import { OrbitControls, Sphere, MeshDistortMaterial, Float, Environment } from "
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import {
     Mail,
     Phone,
@@ -21,7 +20,6 @@ import {
     Sparkles,
 } from "lucide-react";
 
-/* 3D Components - Disabled on mobile for performance */
 function AnimatedSphere() {
     return (
         <Float speed={2} rotationIntensity={1} floatIntensity={2}>
@@ -40,10 +38,10 @@ function AnimatedSphere() {
 }
 
 function Particles({ count = 100 }: { count?: number }) {
-    const particles = Array.from({ length: count });
+    const particlePositions = Array.from({ length: count });
     return (
         <>
-            {particles.map((_, i) => {
+            {particlePositions.map((_, i) => {
                 const x = (Math.random() - 0.5) * 10;
                 const y = (Math.random() - 0.5) * 10;
                 const z = (Math.random() - 0.5) * 10;
@@ -73,7 +71,6 @@ export default function ContactPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
-    // Mobile detection for performance optimization
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
@@ -81,7 +78,7 @@ export default function ContactPage() {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
-    const handleChange = (
+    const handleInputChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
         setFormData({
@@ -94,7 +91,7 @@ export default function ContactPage() {
         e.preventDefault();
         setIsSubmitting(true);
         
-        const recipient = "hello@tadstechfe.web.app";
+        const recipient = "motrenewed@gmail.com";
         const subject = encodeURIComponent(formData.subject);
         const body = encodeURIComponent(
             `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
@@ -108,7 +105,6 @@ export default function ContactPage() {
         setFormData({ name: "", email: "", subject: "", message: "" });
     };
 
-    // SEO: Structured contact information
     const contactInfo = [
         {
             icon: Mail,
@@ -142,18 +138,17 @@ export default function ContactPage() {
         { icon: Twitter, href: "#", label: "Twitter" },
     ];
 
+    const floatingParticleCount = isMobile ? 5 : 20;
+
     return (
         <div className="min-h-screen bg-background">
             <Header />
 
-            {/* Hero Section - Mobile optimized */}
             <section 
                 className="relative h-[70vh] sm:h-screen max-h-[900px] min-h-[500px] sm:min-h-[600px] flex items-center justify-center overflow-hidden bg-linear-to-b from-background via-secondary/5 to-background"
-                aria-labelledby="contact-hero-title"
             >
-                {/* 3D Background - Disabled on mobile */}
                 {!isMobile && (
-                    <div className="absolute inset-0 z-0" aria-hidden="true">
+                    <div className="absolute inset-0 z-0">
                         <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
                             <Suspense fallback={null}>
                                 <ambientLight intensity={0.5} />
@@ -173,7 +168,7 @@ export default function ContactPage() {
                     </div>
                 )}
 
-                <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/50 to-background z-1" aria-hidden="true" />
+                <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/50 to-background z-1" />
 
                 <div className="relative z-10 text-center px-4 sm:px-6 py-12 sm:py-20 max-w-4xl mx-auto w-full">
                     <motion.div
@@ -183,19 +178,17 @@ export default function ContactPage() {
                         className="space-y-4 sm:space-y-6"
                     >
                         <h1 
-                            id="contact-hero-title"
-                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 text-foreground/70 font-poppins max-w-2xl mx-auto typewriter-cursor typewriter-animation"
+                            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-4 text-foreground/70 font-poppins max-w-2xl mx-auto typewriter-cursor typewriter-animation"
                         >
                             Get In Touch
                         </h1>
                         <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70 font-mono max-w-2xl mx-auto px-4">
-                            Have a project in mind? Let&apos;s create something extraordinary together.
+                            Got a project? Let's build it.
                         </p>
                     </motion.div>
 
-                    {/* Floating particles - Reduced on mobile */}
-                    <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-                        {[...Array(isMobile ? 5 : 20)].map((_, i) => (
+                    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                        {[...Array(floatingParticleCount)].map((_, i) => (
                             <motion.div
                                 key={i}
                                 className="absolute w-1 h-1 bg-secondary/40 rounded-full"
@@ -218,7 +211,6 @@ export default function ContactPage() {
                 </div>
             </section>
 
-            {/* Contact Form & Info - Mobile optimized */}
             <section className="relative py-12 sm:py-20 px-4 sm:px-6">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
@@ -233,15 +225,15 @@ export default function ContactPage() {
                                 <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-secondary/30 bg-secondary/10 backdrop-blur-sm">
                                     <MessageSquare className="w-4 h-4 text-secondary" />
                                     <span className="text-xs sm:text-sm font-mono text-secondary">
-                                        Send us a message
+                                        Let's talk
                                     </span>
                                 </div>
                                 <h2 className="font-header text-3xl sm:text-4xl md:text-5xl text-foreground">
-                                    Tell us about your{" "}
+                                    Tell me about your{" "}
                                     <span className="text-secondary">project</span>
                                 </h2>
                                 <p className="text-sm sm:text-base text-foreground/70 font-mono">
-                                    Fill out the form below and we&apos;ll get back to you within 24 hours.
+                                    Fill out the form. I'll get back to you within 24 hours.
                                 </p>
                             </div>
 
@@ -265,7 +257,7 @@ export default function ContactPage() {
                                             id="name"
                                             name="name"
                                             value={formData.name}
-                                            onChange={handleChange}
+                                            onChange={handleInputChange}
                                             required
                                             className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-card/30 border border-foreground/10 rounded-xl text-sm sm:text-base text-foreground font-mono focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all backdrop-blur-sm"
                                             placeholder="John Doe"
@@ -292,7 +284,7 @@ export default function ContactPage() {
                                             id="email"
                                             name="email"
                                             value={formData.email}
-                                            onChange={handleChange}
+                                            onChange={handleInputChange}
                                             required
                                             className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-card/30 border border-foreground/10 rounded-xl text-sm sm:text-base text-foreground font-mono focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all backdrop-blur-sm"
                                             placeholder="john@example.com"
@@ -319,7 +311,7 @@ export default function ContactPage() {
                                             id="subject"
                                             name="subject"
                                             value={formData.subject}
-                                            onChange={handleChange}
+                                            onChange={handleInputChange}
                                             required
                                             className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-card/30 border border-foreground/10 rounded-xl text-sm sm:text-base text-foreground font-mono focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all backdrop-blur-sm"
                                             placeholder="Project Inquiry"
@@ -343,7 +335,7 @@ export default function ContactPage() {
                                         id="message"
                                         name="message"
                                         value={formData.message}
-                                        onChange={handleChange}
+                                        onChange={handleInputChange}
                                         required
                                         rows={6}
                                         className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-card/30 border border-foreground/10 rounded-xl text-sm sm:text-base text-foreground font-mono focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all resize-none backdrop-blur-sm"
@@ -384,7 +376,6 @@ export default function ContactPage() {
                             </form>
                         </motion.div>
 
-                        {/* Contact Info Column */}
                         <motion.div
                             initial={{ opacity: 0, x: 50 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -394,7 +385,7 @@ export default function ContactPage() {
                         >
                             <div className="space-y-6">
                                 <h3 className="font-header text-2xl sm:text-3xl text-foreground mb-6">
-                                    Contact <span className="text-secondary">Information</span>
+                                    Contact <span className="text-secondary">Info</span>
                                 </h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                                     {contactInfo.map((info, index) => (
@@ -503,10 +494,10 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h4 className="font-header text-lg sm:text-xl text-foreground mb-2">
-                                            Quick Response
+                                            Fast Response
                                         </h4>
                                         <p className="text-xs sm:text-sm text-foreground/70 font-mono">
-                                            We typically respond within 24 hours. For urgent inquiries, feel free to call us directly.
+                                            Usually respond within 24 hours. For urgent stuff, just call.
                                         </p>
                                     </div>
                                 </div>
@@ -516,7 +507,6 @@ export default function ContactPage() {
                 </div>
             </section>
 
-            {/* FAQ Section - SEO optimized */}
             <section className="relative py-12 sm:py-20 px-4 sm:px-6 bg-linear-to-b from-background to-secondary/5">
                 <div className="max-w-4xl mx-auto">
                     <motion.div
@@ -527,30 +517,30 @@ export default function ContactPage() {
                         className="text-center mb-8 sm:mb-12"
                     >
                         <h2 className="font-header text-3xl sm:text-4xl md:text-5xl text-foreground mb-4">
-                            Frequently Asked <span className="text-secondary">Questions</span>
+                            Common <span className="text-secondary">Questions</span>
                         </h2>
                         <p className="text-sm sm:text-base text-foreground/70 font-mono">
-                            Quick answers to common questions
+                            Quick answers
                         </p>
                     </motion.div>
 
                     <div className="space-y-3 sm:space-y-4">
                         {[
                             {
-                                q: "What's your typical project timeline?",
-                                a: "Most projects take 4-12 weeks depending on scope and complexity. We'll provide a detailed timeline during our initial consultation.",
+                                q: "How long does a project take?",
+                                a: "Usually 4-12 weeks. Depends on what you need. We'll discuss timeline upfront.",
                             },
                             {
-                                q: "Do you work with startups?",
-                                a: "Absolutely! We love working with startups and offer flexible packages to fit different budgets and growth stages.",
+                                q: "Work with startups?",
+                                a: "Yeah. Got flexible pricing for different budgets.",
                             },
                             {
-                                q: "What technologies do you specialize in?",
-                                a: "We specialize in Next.js, React, TypeScript, and modern web technologies. Check out our Tech Stack section for more details.",
+                                q: "What tech do you use?",
+                                a: "Next.js, React, TypeScript, and other web technologies.",
                             },
                             {
-                                q: "Can you help with existing projects?",
-                                a: "Yes! We offer code reviews, performance optimization, and feature development for existing projects.",
+                                q: "Can you fix existing projects?",
+                                a: "Sure. Code reviews, optimization, new features. Whatever you need.",
                             },
                         ].map((faq, index) => (
                             <motion.div

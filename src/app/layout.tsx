@@ -16,11 +16,11 @@ const PoppinsHeader = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: "TADS Tech - Professional Web Development & 3D Experiences",
+    default: "TADS Tech FrontEnd development done right",
     template: "%s | TADS Tech",
   },
   description:
-    "TADS Tech specializes in cutting-edge web development with Next.js, React, TypeScript, and Three.js. We create stunning, high-performance web applications and immersive 3D experiences.",
+    "TADS Tech specializes in cutting-edge web development with Next.js, React, TypeScript, and other UI Libraries.",
   keywords: [
     "web development",
     "Next.js",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://tadstechfe.web.app",
     siteName: "TADS Tech",
-    title: "TADS Tech - Professional Web Development & 3D Experiences",
+    title: "TADS Tech FrontEnd development done right",
     description:
       "Transform your vision into reality with cutting-edge web solutions. We specialize in Next.js, React, TypeScript, and Three.js development.",
     images: [
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TADS Tech - Professional Web Development & 3D Experiences",
+    title: "TADS Tech FrontEnd development done right",
     description:
       "Transform your vision into reality with cutting-edge web solutions. We specialize in Next.js, React, TypeScript, and Three.js development.",
     images: ["/twitter-image.jpg"],
@@ -83,10 +83,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
   },
 }; 
 

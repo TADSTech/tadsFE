@@ -7,15 +7,10 @@ import { ArrowRight, Sparkles, Zap, Globe as GlobeIcon, Code2, Download } from "
 import Link from "next/link";
 
 export const CTASection: React.FC = () => {
-    // ============================================================
-    // STATE & DEVICE DETECTION
-    // ============================================================
-    
     const [dimensions, setDimensions] = useState({ width: 1920, height: 1080 });
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        // Device detection and dimension tracking
         const updateDimensions = () => {
             const width = window.innerWidth;
             const height = window.innerHeight;
@@ -29,54 +24,38 @@ export const CTASection: React.FC = () => {
         return () => window.removeEventListener('resize', updateDimensions);
     }, []);
 
-    // ============================================================
-    // FEATURES DATA - SEO-friendly service highlights
-    // ============================================================
-    
     const features = [
         {
             icon: Zap,
-            text: "Lightning-fast delivery",
+            text: "Fast delivery",
         },
         {
             icon: Code2,
-            text: "Clean, scalable code",
+            text: "Clean code",
         },
         {
             icon: GlobeIcon,
-            text: "Global reach",
+            text: "Built to scale",
         },
         {
             icon: Sparkles,
-            text: "Cutting-edge tech",
+            text: "Modern tech",
         },
     ];
 
-    // ============================================================
-    // RENDER
-    // ============================================================
-    
     return (
         <AuroraBackground
-            className="relative min-h-screen h-auto overflow-hidden"
+            className="relative min-h-screen h-auto overflow-hidden p-0!"
             showRadialGradient={false}
             style={{
                 "--aurora": "repeating-linear-gradient(100deg,#134a87_10%,#1a5d9e_15%,#134a87_20%,#0d3461_25%,#134a87_30%)",
                 "--dark-gradient": "repeating-linear-gradient(100deg,#000_0%,#000_7%,transparent_10%,transparent_12%,#000_16%)",
             } as React.CSSProperties}
         >
-            <section className="relative min-h-screen bg-background/80 backdrop-blur-sm overflow-hidden py-12 sm:py-20 px-4 sm:px-6">
-                {/* ============================================================ */}
-                {/* BACKGROUND OVERLAYS - Subtle gradient layers */}
-                {/* ============================================================ */}
-                
+            <section className="relative min-h-screen bg-background/80 backdrop-blur-sm overflow-hidden py-12 sm:py-20 px-4 sm:px-6 w-full">
                 <div className="absolute inset-0 bg-linear-to-b from-background/50 via-secondary/5 to-background/50 pointer-events-none" />
                 <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-secondary/10 via-transparent to-transparent pointer-events-none" />
 
-                {/* ============================================================ */}
-                {/* ANIMATED PARTICLES - Disabled on mobile for performance */}
-                {/* ============================================================ */}
-                
                 {!isMobile && (
                     <div className="absolute inset-0 pointer-events-none">
                         {[...Array(30)].map((_, i) => (
@@ -104,10 +83,6 @@ export const CTASection: React.FC = () => {
 
                 <div className="max-w-7xl mx-auto relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[80vh]">
-                        {/* ============================================================ */}
-                        {/* LEFT CONTENT - Main CTA messaging */}
-                        {/* ============================================================ */}
-                        
                         <motion.div
                             initial={{ opacity: 0, x: isMobile ? 0 : -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -115,7 +90,6 @@ export const CTASection: React.FC = () => {
                             transition={{ duration: isMobile ? 0.5 : 0.8 }}
                             className="space-y-6 sm:space-y-8"
                         >
-                            {/* Badge - "Ready to build" indicator */}
                             <motion.div
                                 initial={{ opacity: 0, scale: isMobile ? 1 : 0.8 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
@@ -125,11 +99,10 @@ export const CTASection: React.FC = () => {
                             >
                                 <Sparkles className="w-4 h-4 text-secondary" />
                                 <span className="text-sm font-mono text-secondary">
-                                    Ready to Build Something Amazing?
+                                    Got an idea?
                                 </span>
                             </motion.div>
 
-                            {/* Main Heading - Primary SEO content */}
                             <motion.div
                                 initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -137,17 +110,15 @@ export const CTASection: React.FC = () => {
                                 transition={{ duration: 0.6, delay: isMobile ? 0.1 : 0.3 }}
                             >
                                 <h2 className="font-header text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground mb-4 sm:mb-6 leading-tight">
-                                    Let's Create
+                                    Let's Build
                                     <br />
-                                    <span className="text-secondary">Together</span>
+                                    <span className="text-secondary">Something</span>
                                 </h2>
                                 <p className="text-base sm:text-lg md:text-xl text-foreground/70 leading-relaxed font-mono max-w-xl">
-                                    Transform your vision into reality with cutting-edge web solutions. 
-                                    From concept to deployment, we craft exceptional digital experiences.
+                                    Turn your idea into a working product. Fast, clean, and at an affordable price.
                                 </p>
                             </motion.div>
 
-                            {/* Features Grid - Service highlights */}
                             <motion.div
                                 initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -172,7 +143,6 @@ export const CTASection: React.FC = () => {
                                 ))}
                             </motion.div>
 
-                            {/* CTA Button - Primary conversion action */}
                             <motion.div
                                 initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -180,9 +150,8 @@ export const CTASection: React.FC = () => {
                                 transition={{ duration: 0.6, delay: isMobile ? 0.3 : 0.6 }}
                                 className="flex flex-col sm:flex-row gap-4 pt-2 sm:pt-4"
                             >
-                                <Link href="/contact/" aria-label="Get started with TADS Tech - Contact us for web development services">
+                                <Link href="/contact/" aria-label="Get started">
                                     <div className="relative group cursor-pointer">
-                                        {/* Glowing effect - disabled on mobile for performance */}
                                         {!isMobile && (
                                             <GlowingEffect
                                                 blur={25}
@@ -196,13 +165,11 @@ export const CTASection: React.FC = () => {
                                             <span className="relative z-10">Get Started</span>
                                             <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
                                             
-                                            {/* Animated background */}
                                             <div className="absolute inset-0 bg-linear-to-r from-secondary via-secondary/80 to-secondary group-hover:scale-110 transition-transform duration-500" />
                                         </button>
                                     </div>
                                 </Link>
 
-                                {/* CV Download Button - Transparent with white border */}
                                 <a 
                                     href="/TADSFE-CV-FULL.pdf" 
                                     download
@@ -215,7 +182,6 @@ export const CTASection: React.FC = () => {
                                 </a>
                             </motion.div>
 
-                            {/* Trust Indicators - Social proof metrics */}
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
@@ -225,26 +191,21 @@ export const CTASection: React.FC = () => {
                             >
                                 <div className="text-center">
                                     <div className="font-header text-2xl sm:text-3xl text-secondary">2+</div>
-                                    <div className="text-xs text-foreground/50 font-mono">Years Experience</div>
+                                    <div className="text-xs text-foreground/50 font-mono">Years</div>
                                 </div>
                                 <div className="w-px h-10 sm:h-12 bg-foreground/10" />
                                 <div className="text-center">
                                     <div className="font-header text-2xl sm:text-3xl text-secondary">12+</div>
-                                    <div className="text-xs text-foreground/50 font-mono">Happy Clients</div>
+                                    <div className="text-xs text-foreground/50 font-mono">Clients</div>
                                 </div>
                                 <div className="w-px h-10 sm:h-12 bg-foreground/10" />
                                 <div className="text-center">
                                     <div className="font-header text-2xl sm:text-3xl text-secondary">96%</div>
-                                    <div className="text-xs text-foreground/50 font-mono">Satisfaction</div>
+                                    <div className="text-xs text-foreground/50 font-mono">Happy</div>
                                 </div>
                             </motion.div>
                         </motion.div>
 
-                        {/* ============================================================ */}
-                        {/* RIGHT VISUAL CONTENT - Decorative animations */}
-                        {/* Simplified on mobile for better performance */}
-                        {/* ============================================================ */}
-                        
                         <motion.div
                             initial={{ opacity: 0, x: isMobile ? 0 : 50 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -253,7 +214,6 @@ export const CTASection: React.FC = () => {
                             className="relative h-[400px] sm:h-[500px] lg:h-[700px] flex items-center justify-center"
                         >
                             <div className="relative w-full h-full flex items-center justify-center">
-                                {/* Glowing orb - static on mobile */}
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <motion.div
                                         animate={isMobile ? {} : {
@@ -269,7 +229,6 @@ export const CTASection: React.FC = () => {
                                     />
                                 </div>
 
-                                {/* Floating tech badges - reduced animation on mobile */}
                                 <motion.div
                                     animate={isMobile ? {} : {
                                         y: [0, -20, 0],
@@ -314,7 +273,6 @@ export const CTASection: React.FC = () => {
                                     TypeScript
                                 </motion.div>
 
-                                {/* Central rotating element - slower on mobile */}
                                 <motion.div
                                     animate={{
                                         rotate: 360,
@@ -336,10 +294,6 @@ export const CTASection: React.FC = () => {
                     </div>
                 </div>
 
-                {/* ============================================================ */}
-                {/* BOTTOM WAVE DECORATION - Visual separator */}
-                {/* ============================================================ */}
-                
                 <div className="absolute bottom-0 left-0 w-full h-24 sm:h-32 pointer-events-none">
                     <svg
                         className="absolute bottom-0 w-full h-full"
