@@ -66,6 +66,22 @@
     line-height: 1.5;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  html::-webkit-scrollbar {
+    display: none;
   }
 }
 
