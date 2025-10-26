@@ -112,13 +112,6 @@ export default function Home() {
               />
             </div>
           </div>
-          
-          <h1 
-            ref={textRef}
-            className="text-2xl font-bold mt-12 text-foreground"
-          >
-            Loading, please wait...
-          </h1>
         </div>
       )}
     </div>
