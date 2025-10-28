@@ -9,22 +9,22 @@ import { Star } from "lucide-react";
 export const ClientSection: React.FC = () => {
     const clientTestimonials = [
         {
-            quote: "Mike delivered exactly what we needed. Clean code, fast site, no BS. Would work with him again.",
+            quote: "Mike delivered exactly what we needed with clean code and fast performance. Professional, reliable work throughout the project.",
             name: "Sarah Mitchell",
             title: "HRM, TechFlow Solutions"
         },
         {
-            quote: "Didn't just build what we asked for. Actually looked at our data and made it better. User engagement went up 20%.",
+            quote: "He took time to understand our data and improved the solution beyond initial requirements. User engagement increased by 20%.",
             name: "Matilda Olasunkanmi",
             title: "Product Manager, DataViz Pro"
         },
         {
-            quote: "Turned our clunky old site into something people actually want to use. Fast turnaround, solid work.",
+            quote: "Transformed our outdated platform into a modern, user-friendly application. Fast delivery without compromising quality.",
             name: "Emily Adams",
             title: "Software Engineer, CloudSync"
         },
         {
-            quote: "Finished early. Didn't cut corners. That's rare. Highly recommend.",
+            quote: "Delivered ahead of schedule with attention to detail and solid technical execution. Would definitely work together again.",
             name: "Aisha Olawale",
             title: "Director of Engineering, NexGen Apps"
         }
@@ -51,7 +51,8 @@ export const ClientSection: React.FC = () => {
                         transition={{ duration: 0.6 }}
                         className="text-sm sm:text-base md:text-lg text-foreground/80 leading-relaxed mb-6 font-mono"
                     >
-                        Built sites for startups and businesses. Here's what they said about it.
+                        I've worked with startups and established businesses on web projects of varying scale. 
+                        Here's what some clients have said.
                     </motion.p>
 
                     <motion.div

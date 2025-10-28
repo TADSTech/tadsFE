@@ -183,7 +183,7 @@ export default function ContactPage() {
                             Get In Touch
                         </h1>
                         <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70 font-mono max-w-2xl mx-auto px-4">
-                            Got a project? Let's build it.
+                            Have a project in mind? Let's discuss how I can help.
                         </p>
                     </motion.div>
 
@@ -232,9 +232,9 @@ export default function ContactPage() {
                                     Tell me about your{" "}
                                     <span className="text-secondary">project</span>
                                 </h2>
-                                <p className="text-sm sm:text-base text-foreground/70 font-mono">
-                                    Fill out the form. I'll get back to you within 24 hours.
-                                </p>
+                                                                    <p className="text-sm sm:text-base text-foreground/70 font-mono">
+                                        Fill out the form below and I'll respond within 24 hours.
+                                    </p>
                             </div>
 
                             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
@@ -339,7 +339,7 @@ export default function ContactPage() {
                                         required
                                         rows={6}
                                         className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-card/30 border border-foreground/10 rounded-xl text-sm sm:text-base text-foreground font-mono focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 transition-all resize-none backdrop-blur-sm"
-                                        placeholder="Tell us about your project..."
+                                        placeholder="Describe your project requirements..."
                                     />
                                 </motion.div>
 
@@ -494,10 +494,10 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h4 className="font-header text-lg sm:text-xl text-foreground mb-2">
-                                            Fast Response
+                                            Response Time
                                         </h4>
                                         <p className="text-xs sm:text-sm text-foreground/70 font-mono">
-                                            Usually respond within 24 hours. For urgent stuff, just call.
+                                            I typically respond within 24 hours. For urgent inquiries, feel free to call directly.
                                         </p>
                                     </div>
                                 </div>
@@ -517,30 +517,30 @@ export default function ContactPage() {
                         className="text-center mb-8 sm:mb-12"
                     >
                         <h2 className="font-header text-3xl sm:text-4xl md:text-5xl text-foreground mb-4">
-                            Common <span className="text-secondary">Questions</span>
+                            Frequently Asked <span className="text-secondary">Questions</span>
                         </h2>
                         <p className="text-sm sm:text-base text-foreground/70 font-mono">
-                            Quick answers
+                            Answers to common questions about working together
                         </p>
                     </motion.div>
 
                     <div className="space-y-3 sm:space-y-4">
                         {[
                             {
-                                q: "How long does a project take?",
-                                a: "Usually 4-12 weeks. Depends on what you need. We'll discuss timeline upfront.",
+                                q: "How long does a project typically take?",
+                                a: "Most projects take 4-12 weeks depending on scope and complexity. I'll provide a detailed timeline estimate after our initial discussion.",
                             },
                             {
-                                q: "Work with startups?",
-                                a: "Yeah. Got flexible pricing for different budgets.",
+                                q: "Do you work with startups?",
+                                a: "Yes. I offer flexible pricing options tailored to different budgets and project stages.",
                             },
                             {
-                                q: "What tech do you use?",
-                                a: "Next.js, React, TypeScript, and other web technologies.",
+                                q: "What technologies do you work with?",
+                                a: "Primarily Next.js, React, TypeScript, and modern web development tools. I choose technologies based on project requirements.",
                             },
                             {
-                                q: "Can you fix existing projects?",
-                                a: "Sure. Code reviews, optimization, new features. Whatever you need.",
+                                q: "Can you help with existing projects?",
+                                a: "Absolutely. I can assist with code reviews, performance optimization, bug fixes, or adding new features to existing applications.",
                             },
                         ].map((faq, index) => (
                             <motion.div

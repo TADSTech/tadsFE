@@ -9,23 +9,23 @@ export const WhatWeDo: React.FC = () => {
     const services = [
         {
             icon: Layout,
-            title: "Design that works",
-            description: "Interfaces that look good and actually make sense to use."
+            title: "User Interface Design",
+            description: "Functional, intuitive interfaces that balance aesthetics with usability."
         },
         {
             icon: Gauge,
-            title: "Make it fast",
-            description: "Nobody likes waiting. I optimize until it's smooth."
+            title: "Performance Optimization",
+            description: "Fast load times and smooth interactions through careful optimization."
         },
         {
             icon: Code,
-            title: "Build it right",
-            description: "Components that scale. Code that doesn't break when you touch it."
+            title: "Frontend Development",
+            description: "Scalable, maintainable component architecture that stands the test of time."
         },
         {
             icon: Link,
-            title: "Connect the dots",
-            description: "APIs, databases, third-party tools. Whatever needs to talk, I make it work."
+            title: "System Integration",
+            description: "Connecting APIs, databases, and third-party services into cohesive solutions."
         }
     ]
 
@@ -42,8 +42,8 @@ export const WhatWeDo: React.FC = () => {
                         transition={{ duration: 0.6 }}
                         className="text-base md:text-lg text-foreground/80 leading-relaxed mb-6 font-mono"
                     >
-                        Frontend development. Design systems. Performance tuning. The usual stuff, 
-                        but done well.
+                        I specialize in frontend development, design systems, and performance optimization. 
+                        Modern tools, proven practices.
                     </motion.p>
                     
                     <motion.p 
@@ -53,7 +53,7 @@ export const WhatWeDo: React.FC = () => {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="text-sm md:text-base text-foreground/60 leading-relaxed font-mono"
                     >
-                        If it needs to run in a browser, I can probably build it.
+                        From interactive web applications to data visualizations and marketing sites.
                     </motion.p>
                 </div>
 

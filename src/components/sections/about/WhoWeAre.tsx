@@ -9,23 +9,23 @@ export const WhoWeAre: React.FC = () => {
     const principles = [
         {
             icon: Code2,
-            title: "We write code that makes sense",
-            description: "No bloat. No complexity for the sake of it. Just clean, readable code."
+            title: "Code that makes sense",
+            description: "Clean, maintainable code without unnecessary complexity. Built for humans to read."
         },
         {
             icon: Coffee,
-            title: "We care about the details",
-            description: "From pixel-perfect designs to smooth animations. The small things matter."
+            title: "Details matter",
+            description: "Pixel-perfect designs, smooth animations, and thoughtful interactions throughout."
         },
         {
             icon: Zap,
-            title: "We build fast",
-            description: "Speed isn't optional. Every millisecond counts when users are waiting."
+            title: "Performance first",
+            description: "Fast load times and responsive interfaces. Users shouldn't have to wait."
         },
         {
             icon: Heart,
-            title: "We solve real problems",
-            description: "Tech for tech's sake is boring. We build things people actually need."
+            title: "Purpose-driven development",
+            description: "Technology that solves real problems and delivers genuine value."
         }
     ]
 
@@ -42,8 +42,8 @@ export const WhoWeAre: React.FC = () => {
                         transition={{ duration: 0.6 }}
                         className="text-base md:text-lg text-foreground/80 leading-relaxed mb-6 font-mono"
                     >
-                        I build websites. Started with data analytics, realized I liked making things look good. 
-                        Now I do both.
+                        I develop web applications with a focus on frontend development and user experience. 
+                        My background in data analytics informs how I approach design and optimization.
                     </motion.p>
                     
                     <motion.p 
@@ -53,7 +53,7 @@ export const WhoWeAre: React.FC = () => {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="text-sm md:text-base text-foreground/60 leading-relaxed font-mono"
                     >
-                        Code should be simple. Design should be clean. Everything else is noise.
+                        I believe in simple, effective code and intentional design choices.
                     </motion.p>
                 </div>
 

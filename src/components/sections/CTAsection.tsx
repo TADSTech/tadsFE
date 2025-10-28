@@ -99,7 +99,7 @@ export const CTASection: React.FC = () => {
                             >
                                 <Sparkles className="w-4 h-4 text-secondary" />
                                 <span className="text-sm font-mono text-secondary">
-                                    Got an idea?
+                                    Ready to start?
                                 </span>
                             </motion.div>
 
@@ -110,12 +110,13 @@ export const CTASection: React.FC = () => {
                                 transition={{ duration: 0.6, delay: isMobile ? 0.1 : 0.3 }}
                             >
                                 <h2 className="font-header text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground mb-4 sm:mb-6 leading-tight">
-                                    Let's Build
+                                    Let's Work
                                     <br />
-                                    <span className="text-secondary">Something</span>
+                                    <span className="text-secondary">Together</span>
                                 </h2>
                                 <p className="text-base sm:text-lg md:text-xl text-foreground/70 leading-relaxed font-mono max-w-xl">
-                                    Turn your idea into a working product. Fast, clean, and at an affordable price.
+                                    I help turn ideas into functional, well-designed web applications. 
+                                    Clear communication, reliable delivery, fair pricing.
                                 </p>
                             </motion.div>
 

@@ -56,7 +56,7 @@ export const Hero: React.FC = () => {
                         transition={{ duration: 0.6, delay: 0.3 }}
                         className="text-sm sm:text-base md:text-lg max-w-lg mb-10 text-foreground/60"
                     >
-                        Frontend development by a data minded individual
+                        Frontend development focused on performance and user experience
                     </motion.p>
                     
                     <motion.div
