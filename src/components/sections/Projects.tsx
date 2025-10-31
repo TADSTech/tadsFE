@@ -3,27 +3,27 @@ import React from "react";
 import { motion } from "motion/react";
 import { SectionTitle } from "../ui/section-title";
 import { CardSpotlight } from "../ui/card-spotlight";
-import { ExternalLink, Github, Code2, Layers, Database, Zap } from "lucide-react";
+import { ExternalLink, Github, Code2, Table, Notebook, Database, Zap } from "lucide-react";
 
 export const Projects: React.FC = () => {
     const projects = [
         {
             id: 1,
-            title: "TADS | FE",
-            description: "Modern interactive portfolio website built with Next.js, React, and Tailwind CSS. Showcases 3D graphics and responsive design for TADS|FE",
-            icon: Layers,
+            title: "Mini Data Manim",
+            description: "Free and open-source, portable, data manipulation webapp",
+            icon: Table,
             links: {
-                github: "https://github.com/TADSTech/tadsFE",
+                github: "https://github.com/TADSTech/minidatamanim",
             },
             stats: {
-                label: "Design",
-                value: "Minimalist"
+                label: "Data Manipulation",
+                value: "Simplified"
             }
         },
         {
             id: 2,
             title: "TADSTech website",
-            description: "The average data scientist main portfolio website built with Vite, React, and MUI. Showcases projects and skills with a clean, professional design.",
+            description: "The average data scientist main portfolio website built with Vite, React, and MUI. Showcases projects and skills with a clean, professional design, and an interactive terminal.",
             icon: Code2,
             links: {
                 demo: "https://tadstech.web.app",
@@ -60,6 +60,20 @@ export const Projects: React.FC = () => {
             stats: {
                 label: "Uptime",
                 value: "99.9%"
+            }
+        },
+        {
+            id: 5,
+            title: "RMDify",
+            description: "A modern, minimalist markdown editor built with React and TypeScript.",
+            icon: Notebook,
+            links: {
+                demo: "https://rmdify.web.app/",
+                github: "https://github.com/TADSTech/RMDify"
+            },
+            stats: {
+                label: "Technologies",
+                value: "React+TS"
             }
         },
     ];
