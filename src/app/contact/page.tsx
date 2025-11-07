@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, Suspense, useEffect } from "react";
+import React, { useState, Suspense, useEffect, useMemo } from "react";
 import { motion } from "motion/react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Sphere, MeshDistortMaterial, Float, Environment } from "@react-three/drei";
@@ -71,6 +71,17 @@ export default function ContactPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
+    // Generate particles once on mount to prevent hydration mismatch
+    const particles = useMemo(() => {
+        return [...Array(20)].map((_, i) => ({
+            id: i,
+            left: (i * 5.26) % 100, // Deterministic distribution
+            top: (i * 4.76) % 100,
+            duration: 3 + (i % 3),
+            delay: (i * 0.2) % 2,
+        }));
+    }, []);
+
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
@@ -133,14 +144,12 @@ export default function ContactPage() {
     ];
 
     const socialLinks = [
-        { icon: Github, href: "#", label: "GitHub" },
-        { icon: Linkedin, href: "#", label: "LinkedIn" },
-        { icon: Twitter, href: "#", label: "Twitter" },
+        { icon: Github, href: "https://github.com/tadstech", label: "GitHub" },
+        { icon: Linkedin, href: "https://linkedin.com/in/tadstech", label: "LinkedIn" },
+        { icon: Twitter, href: "https://x.com/tads_tech", label: "Twitter" },
     ];
 
-    const floatingParticleCount = isMobile ? 5 : 20;
-
-    return (
+    const floatingParticleCount = isMobile ? 5 : 20;    return (
         <div className="min-h-screen bg-background">
             <Header />
 
@@ -174,36 +183,32 @@ export default function ContactPage() {
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
+                        transition={{ duration: 0.4 }}
                         className="space-y-4 sm:space-y-6"
                     >
-                        <h1 
-                            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-4 text-foreground/70 font-poppins max-w-2xl mx-auto typewriter-cursor typewriter-animation"
-                        >
-                            Get In Touch
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 text-foreground font-header leading-tight">
+                            Let's Connect
                         </h1>
-                        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70 font-mono max-w-2xl mx-auto px-4">
+                        <p className="text-base sm:text-lg md:text-xl text-foreground/70 font-mono max-w-2xl mx-auto px-4">
                             Have a project in mind? Let's discuss how I can help.
                         </p>
                     </motion.div>
 
                     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                        {[...Array(floatingParticleCount)].map((_, i) => (
+                        {particles.map((particle) => (
                             <motion.div
-                                key={i}
+                                key={particle.id}
                                 className="absolute w-1 h-1 bg-secondary/40 rounded-full"
-                                style={{
-                                    left: `${Math.random() * 100}%`,
-                                    top: `${Math.random() * 100}%`,
-                                }}
+                                initial={{ left: `${particle.left}%`, top: `${particle.top}%`, opacity: 0 }}
                                 animate={{
-                                    y: [0, Math.random() * -100 - 50],
-                                    opacity: [0, 1, 0],
+                                    y: [-0, -100],
+                                    opacity: [0, 0.8, 0],
                                 }}
                                 transition={{
-                                    duration: Math.random() * 5 + 5,
+                                    duration: particle.duration,
                                     repeat: Infinity,
-                                    delay: Math.random() * 3,
+                                    delay: particle.delay,
+                                    ease: "easeInOut",
                                 }}
                             />
                         ))}
@@ -242,7 +247,7 @@ export default function ContactPage() {
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: 0.1 }}
+                                    transition={{ duration: 0.3, delay: 0.05 }}
                                 >
                                     <label
                                         htmlFor="name"
@@ -296,7 +301,7 @@ export default function ContactPage() {
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: 0.3 }}
+                                    transition={{ duration: 0.3, delay: 0.15 }}
                                 >
                                     <label
                                         htmlFor="subject"
@@ -323,7 +328,7 @@ export default function ContactPage() {
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: 0.4 }}
+                                    transition={{ duration: 0.3, delay: 0.2 }}
                                 >
                                     <label
                                         htmlFor="message"
@@ -347,7 +352,7 @@ export default function ContactPage() {
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: 0.5 }}
+                                    transition={{ duration: 0.3, delay: 0.25 }}
                                 >
                                     <div className="relative group cursor-pointer">
                                         {!isMobile && (
@@ -380,7 +385,7 @@ export default function ContactPage() {
                             initial={{ opacity: 0, x: 50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
+                            transition={{ duration: 0.5 }}
                             className="space-y-6 sm:space-y-8"
                         >
                             <div className="space-y-6">
@@ -395,7 +400,7 @@ export default function ContactPage() {
                                             initial={{ opacity: 0, scale: 0.9 }}
                                             whileInView={{ opacity: 1, scale: 1 }}
                                             viewport={{ once: true }}
-                                            transition={{ duration: 0.4, delay: index * 0.1 }}
+                                            transition={{ duration: 0.3, delay: index * 0.05 }}
                                             className="group relative p-4 sm:p-6 rounded-xl border border-foreground/10 bg-card/30 backdrop-blur-sm hover:border-secondary/50 transition-all duration-300 cursor-pointer"
                                             aria-label={`${info.title}: ${info.value}`}
                                         >
@@ -435,7 +440,7 @@ export default function ContactPage() {
                                             initial={{ opacity: 0, scale: 0.8 }}
                                             whileInView={{ opacity: 1, scale: 1 }}
                                             viewport={{ once: true }}
-                                            transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                                            transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
                                             className="group p-3 sm:p-4 rounded-xl border border-foreground/10 bg-card/30 backdrop-blur-sm hover:border-secondary hover:bg-secondary/10 transition-all duration-300"
                                             aria-label={social.label}
                                         >
@@ -451,7 +456,7 @@ export default function ContactPage() {
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.8, delay: 0.6 }}
+                                    transition={{ duration: 0.5, delay: 0.4 }}
                                     className="relative h-64 rounded-xl overflow-hidden border border-foreground/10 bg-card/30 backdrop-blur-sm"
                                     aria-hidden="true"
                                 >
@@ -485,7 +490,7 @@ export default function ContactPage() {
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: 0.8 }}
+                                transition={{ duration: 0.5, delay: 0.5 }}
                                 className="p-4 sm:p-6 rounded-xl border border-secondary/30 bg-secondary/5 backdrop-blur-sm"
                             >
                                 <div className="flex items-start gap-3 sm:gap-4">
@@ -513,7 +518,7 @@ export default function ContactPage() {
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
+                        transition={{ duration: 0.5 }}
                         className="text-center mb-8 sm:mb-12"
                     >
                         <h2 className="font-header text-3xl sm:text-4xl md:text-5xl text-foreground mb-4">
@@ -548,7 +553,7 @@ export default function ContactPage() {
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                transition={{ duration: 0.3, delay: index * 0.05 }}
                                 className="p-4 sm:p-6 rounded-xl border border-foreground/10 bg-card/30 backdrop-blur-sm hover:border-secondary/50 transition-all duration-300"
                             >
                                 <h3 className="font-header text-lg sm:text-xl text-foreground mb-2 sm:mb-3">

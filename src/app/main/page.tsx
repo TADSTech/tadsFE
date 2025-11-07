@@ -17,8 +17,8 @@ export default function MainPage() {
             <Hero />
             <WhoWeAre />
             <WhatWeDo />
-            <ClientSection />
             <Projects />
+            <ClientSection />
             <CTASection />
             <Footer />
         </div>

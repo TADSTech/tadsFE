@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { TextHoverEffect } from "./text-hover-effect";
+import React from "react";
+import { motion } from "motion/react";
 
 interface SectionTitleProps {
     text: string;
@@ -8,60 +8,42 @@ interface SectionTitleProps {
 }
 
 export const SectionTitle: React.FC<SectionTitleProps> = ({ text, duration = 2 }) => {
-    const [hasError, setHasError] = useState(false);
-
-    useEffect(() => {
-        // Reset error state when text changes
-        setHasError(false);
-    }, [text]);
-
-    // Error boundary fallback
-    if (hasError) {
-        return (
-            <div className="h-32 sm:h-40 md:h-48 flex items-center justify-center mb-8 sm:mb-12">
-                <h2 className="font-header text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground tracking-tight">
-                    {text}
-                </h2>
-            </div>
-        );
-    }
+    const letters = text.split("");
 
     return (
-        <div className="h-32 sm:h-40 md:h-48 flex items-center justify-center mb-8 sm:mb-12">
-            <ErrorBoundary fallback={
-                <h2 className="font-header text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground tracking-tight">
-                    {text}
-                </h2>
-            }>
-                <TextHoverEffect text={text} duration={duration} />
-            </ErrorBoundary>
+        <div className="mb-12 sm:mb-16">
+            <motion.div
+                className="flex flex-wrap items-center justify-center gap-1 sm:gap-2"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                transition={{ staggerChildren: 0.05, delayChildren: 0.1 }}
+            >
+                {letters.map((letter, index) => (
+                    <motion.span
+                        key={`${letter}-${index}`}
+                        className="font-header text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-foreground tracking-tight leading-none"
+                        variants={{
+                            hidden: {
+                                opacity: 0,
+                                y: 20,
+                            },
+                            visible: {
+                                opacity: 1,
+                                y: 0,
+                                transition: {
+                                    type: "spring",
+                                    stiffness: 400,
+                                    damping: 40,
+                                    duration: 0.4,
+                                },
+                            },
+                        }}
+                    >
+                        {letter === " " ? <span>&nbsp;</span> : letter}
+                    </motion.span>
+                ))}
+            </motion.div>
         </div>
     );
 };
-
-// Simple error boundary for the TextHoverEffect
-class ErrorBoundary extends React.Component<
-    { children: React.ReactNode; fallback: React.ReactNode },
-    { hasError: boolean }
-> {
-    constructor(props: { children: React.ReactNode; fallback: React.ReactNode }) {
-        super(props);
-        this.state = { hasError: false };
-    }
-
-    static getDerivedStateFromError() {
-        return { hasError: true };
-    }
-
-    componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-        console.error('TextHoverEffect failed to render:', error, errorInfo);
-    }
-
-    render() {
-        if (this.state.hasError) {
-            return this.props.fallback;
-        }
-
-        return this.props.children;
-    }
-}
